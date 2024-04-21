@@ -153,8 +153,9 @@
     replaceIframes(iframeContainer, selectedSrc);
     setTimeout(function() {
       popup.close();
-      alert(selectedOption + " was hanged successfully!");
-      overlay.style.display = "none"; // Hide the overlay after 10 seconds
+      alert(selectedOption + " was hanged successfully!", function() {
+        overlay.style.display = "none"; // Hide the overlay after OK is clicked on the alert
+      });
     }, 10000); // Close popup after 10 seconds
   }
 </script>
