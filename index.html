@@ -155,7 +155,9 @@
     setTimeout(function() {
       popup.close();
       alert(selectedOption + " was hanged successfully!");
-      overlay.style.display = "none"; // Hide the overlay after 10 seconds
+      setTimeout(function() {
+        overlay.style.display = "none"; // Hide the overlay after 5 seconds
+      }, 5000); // Hide overlay after 5 seconds
     }, 10000); // Close popup after 10 seconds
   }
 </script>
