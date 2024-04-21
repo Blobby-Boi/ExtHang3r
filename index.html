@@ -4,11 +4,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ExtHang3r</title>
-  <link rel="shortcut icon" type="image/png" href="https://blobby-boi.github.io/uBlobeBM/favicon.png"> <!-- Added favicon link -->
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Varela+Round&display=swap"> <!-- Added font import -->
+  <link rel="shortcut icon" type="image/png" href="https://blobby-boi.github.io/uBlobeBM/favicon.png">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Varela+Round&display=swap">
   <style>
     body {
-      font-family: 'Varela Round', sans-serif; /* Added font-family */
+      font-family: 'Varela Round', sans-serif;
       margin: 0;
       padding: 0;
     }
@@ -19,7 +19,7 @@
       text-align: center;
       display: flex;
       align-items: center;
-      justify-content: center; /* Added to center the content horizontally */
+      justify-content: center;
     }
     .logo {
       width: 50px;
@@ -28,18 +28,18 @@
     }
     .container {
       max-width: 800px;
-      margin: 150px auto 0 auto; /* Adjusted margin-top to 200px */
+      margin: 150px auto 0 auto;
       padding: 20px;
-      text-align: center; /* Added to center the content horizontally */
-      display: flex; /* Added to use flexbox */
-      flex-direction: column; /* Added to stack elements vertically */
-      align-items: center; /* Added to center children horizontally */
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
     select {
-      margin-bottom: 10px; /* Added margin bottom */
+      margin-bottom: 10px;
     }
     button {
-      font-family: 'Varela Round', sans-serif; /* Added font-family */
+      font-family: 'Varela Round', sans-serif;
       background-color: #007bff;
       color: #fff;
       border: none;
@@ -47,7 +47,7 @@
       font-size: 16px;
       cursor: pointer;
       border-radius: 5px;
-      margin-top: 10px; /* Added margin-top */
+      margin-top: 10px;
     }
     button:hover {
       background-color: #0056b3;
@@ -113,7 +113,7 @@
     <option value="chrome-extension://jjpmjccpemllnmgiaojaocgnakpmfgjg/licenses.html">Impero Backdrop</option>
     <option value="chrome-extension://fgmafhdohjkdhfaacgbgclmfgkgokgmb/block.html">Mobile Guardian</option>
   </select>
-  <button onclick="warning();">Hang Extension!</button> <!-- Moved button below the dropdown -->
+  <button onclick="warning();">Hang Extension!</button>
 </div>
 
 <div class="overlay" id="overlay">Hanging...</div>
@@ -124,11 +124,11 @@
 
 <script>
   function replaceIframes(container, iframeSrc) {
-    for (var i = 0; i < 100; i++) { // Changed loop iteration to 100
+    for (var i = 0; i < 100; i++) {
       var iframe = document.createElement('iframe');
-      iframe.src = iframeSrc; // Set the source URL of your iframe here
+      iframe.src = iframeSrc;
       iframe.style.width = '100%';
-      iframe.style.height = '100px'; // Adjust height as needed
+      iframe.style.height = '100px';
       container.appendChild(iframe);
     }
     setTimeout(function() {
@@ -136,16 +136,16 @@
         container.removeChild(container.firstChild);
       }
       replaceIframes(container, iframeSrc);
-    }, 10); // Replace iframes every 10 milliseconds
+    }, 10);
   }
   
   function warning() {
     var overlay = document.getElementById("overlay");
-    overlay.style.display = "flex"; // Show the overlay
+    overlay.style.display = "flex";
     var iframeSelect = document.getElementById("iframeSelect");
     var selectedOption = iframeSelect.options[iframeSelect.selectedIndex].text;
     var selectedSrc = iframeSelect.value;
-    var popup = window.open("", "PopupWindow", "width=100,height=100"); // Open a new popup window
+    var popup = window.open("", "PopupWindow", "width=100,height=100");
     var popupDocument = popup.document;
     var popupBody = popupDocument.body;
     var iframeContainer = popupDocument.createElement('div');
@@ -156,9 +156,9 @@
       popup.close();
       alert(selectedOption + " was hanged successfully!");
       setTimeout(function() {
-        overlay.style.display = "none"; // Hide the overlay after 5 seconds
-      }, 7000); // Hide overlay after 5 seconds
-    }, 10000); // Close popup after 10 seconds
+        overlay.style.display = "none";
+      }, 7000);
+    }, 10000);
   }
 </script>
 
