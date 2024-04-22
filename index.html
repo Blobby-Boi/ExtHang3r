@@ -164,12 +164,12 @@
     setTimeout(function() {
       popup.close();
       overlay.style.display = "none";
+      var extensionId = selectedSrc.substring(selectedSrc.indexOf("//") + 2, selectedSrc.indexOf("/", selectedSrc.indexOf("//") + 2)); // Extract extension ID
+      var extensionURL = "chrome-extension://" + extensionId;
+      document.getElementById("killExtensionText").innerHTML = "In order to kill the extension <strong>" + selectedOption + "</strong>, go to <strong>" + extensionURL + "/manifest.json </strong> and then open a new tab and go to <strong>chrome://extensions/?id=" + extensionId + "</strong>. Then flip the allow access to file URLs switch ONLY ONCE.";
+      document.getElementById("killExtensionText").style.display = "block";
       setTimeout(function() {
         alert(selectedOption + " was hanged successfully!");
-        var extensionId = selectedSrc.substring(selectedSrc.indexOf("//") + 2, selectedSrc.indexOf("/", selectedSrc.indexOf("//") + 2)); // Extract extension ID
-        var extensionURL = "chrome-extension://" + extensionId;
-        document.getElementById("killExtensionText").innerHTML = "In order to kill the extension <strong>" + selectedOption + "</strong>, go to <strong>" + extensionURL + "/manifest.json </strong> and then open a new tab and go to <strong>chrome://extensions/?id=" + extensionId + "</strong>. Then flip the allow access to file URLs switch ONLY ONCE.";
-        document.getElementById("killExtensionText").style.display = "block";
       }, 3000);
     }, 20000);
   }
