@@ -155,9 +155,9 @@
     replaceIframes(iframeContainer, selectedSrc);
     setTimeout(function() {
       popup.close();
-      alert(selectedOption + " was hanged successfully!");
       setTimeout(function() {
         overlay.style.display = "none";
+        alert(selectedOption + " was hanged successfully!");
       }, 20000);
     }, 30000);
   }
