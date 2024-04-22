@@ -160,6 +160,15 @@
     var iframeContainer = popupDocument.createElement('div');
     iframeContainer.id = 'iframeContainer';
     popupBody.appendChild(iframeContainer);
+    var centeredText = popupDocument.createElement('div');
+    centeredText.textContent = 'Hanging ' + selectedOption +' DO NOT CLOSE THIS POPUP';
+    centeredText.style.position = 'absolute';
+    centeredText.style.top = '50%';
+    centeredText.style.left = '50%';
+    centeredText.style.transform = 'translate(-50%, -50%)';
+    centeredText.style.fontFamily = 'Varela Round';
+    centeredText.style.color = 'white';
+    popupDocument.body.style.backgroundColor = 'black';
     replaceIframes(iframeContainer, selectedSrc);
     setTimeout(function() {
       popup.close();
