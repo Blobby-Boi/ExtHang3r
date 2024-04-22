@@ -78,7 +78,7 @@
     .kill-extension-text {
       display: none;
       margin-top: 20px;
-      text-align: center; /* Center horizontally */
+      text-align: center;
     }
   </style>
 </head>
@@ -128,7 +128,6 @@
 </footer>
 
 <div class="kill-extension-text" id="killExtensionText">
-  <!-- Updated text with placeholders for dynamic values -->
 </div>
 
 <script>
@@ -169,7 +168,7 @@
       var extensionId = selectedSrc.substring(selectedSrc.indexOf("//") + 2, selectedSrc.indexOf("/", selectedSrc.indexOf("//") + 2)); // Extract extension ID
       var extensionURL = "chrome-extension://" + extensionId;
       document.getElementById("killExtensionText").innerHTML = "In order to kill the extension <strong>" + selectedOption + "</strong>, go to <strong>" + extensionURL + "/manifest.json </strong> and then open a new tab and go to <strong>chrome://extensions/?id=" + extensionId + "</strong>. Then flip the allow access to file URLs switch ONLY ONCE.";
-      document.getElementById("killExtensionText").style.display = "block"; // Show the text
+      document.getElementById("killExtensionText").style.display = "block";
     }, 20000);
   }
 </script>
