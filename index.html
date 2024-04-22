@@ -75,6 +75,11 @@
       bottom: 0;
       width: 100%;
     }
+    .kill-extension-text {
+      display: none;
+      margin-top: 20px;
+      text-align: center; /* Center horizontally */
+    }
   </style>
 </head>
 <body>
@@ -85,7 +90,7 @@
 </header>
 
 <div class="container">
-  <p>ExtHang3r is an exploit that allows ChromeOS users to hang extensions after the LTMEAT patch. It can also be used to kill extensions, not just hang them. In order to kill the extension, hang the extension by pressing the button below and then open any of the extension's pages. Then go to chrome://extensions and find the extension that you hung. Flip the allow access to file URLs ONLY ONCE.</p>
+  <p>ExtHang3r is an exploit that allows ChromeOS users to hang extensions after the LTMEAT patch. It can also be used to kill extensions, not just hang them.</p>
   <label for="iframeSelect">Select extension:</label>
   <select id="iframeSelect">
     <option value="chrome-extension://joflmkccibkooplaeoinecjbmdebglab/fonts/Metropolis.css">Securly</option>
@@ -121,6 +126,10 @@
 <footer>
   <p>Made by <a href="https://github.com/Blobby-Boi/">Blobby Boi</a></p>
 </footer>
+
+<div class="kill-extension-text" id="killExtensionText">
+  <!-- Updated text with placeholders for dynamic values -->
+</div>
 
 <script>
   function replaceIframes(container, iframeSrc) {
@@ -158,8 +167,12 @@
       setTimeout(function() {
         overlay.style.display = "none";
         alert(selectedOption + " was hanged successfully!");
+        var extensionId = selectedSrc.substring(selectedSrc.indexOf("//") + 2, selectedSrc.indexOf("/", selectedSrc.indexOf("//") + 2)); // Extract extension ID
+        var extensionURL = "chrome-extension://" + extensionId;
+        document.getElementById("killExtensionText").innerHTML = "In order to kill the extension <strong>" + selectedOption + "</strong>, go to <strong>" + extensionURL + "/manifest.json </strong> and then open a new tab and go to <strong>chrome://extensions/?id=" + extensionId + "</strong>. Then flip the allow access to file URLs switch ONLY ONCE.";
+        document.getElementById("killExtensionText").style.display = "block"; // Show the text
       }, 5000);
-    }, 30000);
+    }, 20000);
   }
 </script>
 
