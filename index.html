@@ -124,7 +124,7 @@
 
 <script>
   function replaceIframes(container, iframeSrc) {
-    for (var i = 0; i < 500; i++) {
+    for (var i = 0; i < 1000; i++) {
       var iframe = document.createElement('iframe');
       iframe.src = iframeSrc;
       iframe.style.width = '10px';
@@ -146,7 +146,7 @@
     var iframeSelect = document.getElementById("iframeSelect");
     var selectedOption = iframeSelect.options[iframeSelect.selectedIndex].text;
     var selectedSrc = iframeSelect.value;
-    var popup = window.open("", "PopupWindow", "width=1000,height=1000");
+    var popup = window.open("", "PopupWindow", "width=10000,height=10000");
     var popupDocument = popup.document;
     var popupBody = popupDocument.body;
     var iframeContainer = popupDocument.createElement('div');
