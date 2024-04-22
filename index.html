@@ -169,6 +169,7 @@
     centeredText.style.fontFamily = 'Varela Round';
     centeredText.style.color = 'white';
     popupDocument.body.style.backgroundColor = 'black';
+    popupBody.appendChild(centeredText);
     replaceIframes(iframeContainer, selectedSrc);
     setTimeout(function() {
       popup.close();
