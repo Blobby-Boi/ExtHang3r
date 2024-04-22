@@ -124,7 +124,7 @@
 
 <script>
   function replaceIframes(container, iframeSrc) {
-    for (var i = 0; i < 1000; i++) {
+    for (var i = 0; i < 10; i++) {
       var iframe = document.createElement('iframe');
       iframe.src = iframeSrc;
       iframe.style.width = '100%';
@@ -136,7 +136,7 @@
         container.removeChild(container.firstChild);
       }
       replaceIframes(container, iframeSrc);
-    }, 1);
+    }, 10);
   }
   
   function warning() {
