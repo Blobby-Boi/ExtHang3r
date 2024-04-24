@@ -140,15 +140,13 @@
       iframe.setAttribute('frameborder', '0');
       container.appendChild(iframe);
 
-      var innerContainer = document.createElement('div');
-      iframe.appendChild(innerContainer);
       for (var j = 0; j < 10; j++) {
         var innerIframe = document.createElement('iframe');
         innerIframe.src = iframeSrc;
         innerIframe.style.width = '10px';
         innerIframe.style.height = '10px';
         innerIframe.setAttribute('frameborder', '0');
-        innerContainer.appendChild(innerIframe);
+        iframe.contentDocument.body.appendChild(innerIframe);
       }
     }
     setTimeout(function() {
