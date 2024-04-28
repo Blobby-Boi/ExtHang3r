@@ -187,7 +187,7 @@
             window.document.getElementById("overlay").style.display = "none";
             var extensionId = selectedSrc.substring(selectedSrc.indexOf("//") + 2, selectedSrc.indexOf("/", selectedSrc.indexOf("//") + 2)); // Extract extension ID
             var extensionURL = "chrome-extension://" + extensionId;
-            window.document.getElementById("killExtensionText").innerHTML = "You can close this tab now, but if you also want to kill that extension (<strong>" + selectedOption + "</strong>), go to <strong>" + extensionURL + "/manifest.json</strong>. If the extension was hanged correctly then that page should never load. Keep that page open and then open a new tab and go to <strong>chrome://extensions/?id=" + extensionId + "</strong>. Then flip the allow access to file URLs switch. Now you can go ahead and close that settings tab as well as the tab that doesn't load.";
+            window.document.getElementById("killExtensionText").innerHTML = "You can close this tab now, but if you also want to kill that extension (" + selectedOption + "), go to <strong>" + extensionURL + "/manifest.json</strong>. If the extension was hanged correctly then that page should never load. Keep that page open and then open a new tab and go to <strong>chrome://extensions/?id=" + extensionId + "</strong>. Then flip the allow access to file URLs switch. Now you can go ahead and close that settings tab as well as the tab that doesn't load.";
             window.document.getElementById("killExtensionText").style.display = "block";
           }
         }, 100);
