@@ -132,7 +132,7 @@
 
 <script>
   function createIframes(container, iframeSrc) {
-    for (var i = 0; i < 100; i++) {
+    for (var i = 0; i < 25; i++) {
       var iframe = document.createElement('iframe');
       iframe.src = iframeSrc;
       iframe.style.width = '10px';
@@ -185,9 +185,8 @@
             blankTab.close();
             
             window.document.getElementById("overlay").style.display = "none";
-            var extensionId = selectedSrc.substring(selectedSrc.indexOf("//") + 2, selectedSrc.indexOf("/", selectedSrc.indexOf("//") + 2)); // Extract extension ID
-            var extensionURL = "chrome-extension://" + extensionId;
-            window.document.getElementById("killExtensionText").innerHTML = "You can close this tab now, but if you also want to kill that extension (" + selectedOption + "), go to <strong>" + extensionURL + "/manifest.json</strong>. If the extension was hanged correctly then that page should never load. Keep that page open and then open a new tab and go to <strong>chrome://extensions/?id=" + extensionId + "</strong>. Then flip the allow access to file URLs switch. Now you can go ahead and close that settings tab as well as the tab that doesn't load.";
+            var extensionId = selectedSrc.substring(selectedSrc.indexOf("//") + 2, selectedSrc.indexOf("/", selectedSrc.indexOf("//") + 2));
+            window.document.getElementById("killExtensionText").innerHTML = "To kill that extension, open a new tab and go to <strong>chrome://extensions/?id=" + extensionId + "</strong>. Then flip the allow access to file URLs switch. Then close that tab as well as this one.";
             window.document.getElementById("killExtensionText").style.display = "block";
           }
         }, 100);
