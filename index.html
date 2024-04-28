@@ -78,6 +78,8 @@
     .kill-extension-text {
       display: none;
       margin-top: 20px;
+      margin-left: 40px;
+      margin-right: 40px;
       text-align: center;
     }
   </style>
@@ -186,7 +188,7 @@
             
             window.document.getElementById("overlay").style.display = "none";
             var extensionId = selectedSrc.substring(selectedSrc.indexOf("//") + 2, selectedSrc.indexOf("/", selectedSrc.indexOf("//") + 2));
-            window.document.getElementById("killExtensionText").innerHTML = "To kill that extension, open a new tab and go to <strong>chrome://extensions/?id=" + extensionId + "</strong>. Then flip the allow access to file URLs switch. Then close that tab as well as this one.";
+            window.document.getElementById("killExtensionText").innerHTML = "To kill that extension, open a new tab and go to <strong>chrome://extensions/?id=" + extensionId + "</strong>. Then flip the allow access to file URLs switch. Now you can close that tab as well as this one.";
             window.document.getElementById("killExtensionText").style.display = "block";
           }
         }, 100);
