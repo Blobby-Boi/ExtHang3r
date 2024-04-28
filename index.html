@@ -175,7 +175,6 @@
 
         centeredText.textContent = 'Hanging ' + selectedOption + '...';
 
-        // Open about:blank in the popup window
         var blankTab = popup.open("about:blank", "_blank");
 
         createIframes(iframeContainer, selectedSrc);
@@ -184,7 +183,6 @@
           if (blankTab && !blankTab.closed) {
             blankTab.close();
             
-            // Show kill extension text
             window.document.getElementById("overlay").style.display = "none";
             var extensionId = selectedSrc.substring(selectedSrc.indexOf("//") + 2, selectedSrc.indexOf("/", selectedSrc.indexOf("//") + 2)); // Extract extension ID
             var extensionURL = "chrome-extension://" + extensionId;
