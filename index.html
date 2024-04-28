@@ -131,8 +131,8 @@
 </div>
 
 <script>
-  function replaceIframes(container, iframeSrc) {
-    for (var i = 0; i < 25; i++) {
+  function createIframes(container, iframeSrc) {
+    for (var i = 0; i < 10; i++) {
       var iframe = document.createElement('iframe');
       iframe.src = iframeSrc;
       iframe.style.width = '10px';
@@ -144,24 +144,22 @@
       while (container.firstChild) {
         container.removeChild(container.firstChild);
       }
-      replaceIframes(container, iframeSrc);
-    }, 10);
+      createIframes(container, iframeSrc);
+    }, 100);
   }
   
-  function warning() {
-    var overlay = document.getElementById("overlay");
-    overlay.style.display = "flex";
-    var iframeSelect = document.getElementById("iframeSelect");
-    var selectedOption = iframeSelect.options[iframeSelect.selectedIndex].text;
-    var selectedSrc = iframeSelect.value;
-    var popup = window.open("", "PopupWindow", "width=10000,height=10000");
+  function initPopup(selectedOption, selectedSrc) {
+    var popupName = "Hanging " + selectedOption;
+    var popup = window.open("", popupName, "width=10000,height=10000");
+    popup.document.title = popupName;
+    
     var popupDocument = popup.document;
     var popupBody = popupDocument.body;
     var iframeContainer = popupDocument.createElement('div');
     iframeContainer.id = 'iframeContainer';
     popupBody.appendChild(iframeContainer);
     var centeredText = popupDocument.createElement('div');
-    centeredText.textContent = 'Hanging ' + selectedOption +'... DO NOT CLOSE THIS POPUP';
+    centeredText.textContent = 'Click to hang ' + selectedOption;
     centeredText.style.position = 'absolute';
     centeredText.style.top = '50%';
     centeredText.style.left = '50%';
@@ -169,18 +167,47 @@
     centeredText.style.color = 'white';
     popupDocument.body.style.backgroundColor = 'black';
     popupBody.appendChild(centeredText);
-    replaceIframes(iframeContainer, selectedSrc);
-    setTimeout(function() {
-      popup.close();
-      setTimeout(function() {
-        overlay.style.display = "none";
-        alert(selectedOption + " was hanged successfully!");
-        var extensionId = selectedSrc.substring(selectedSrc.indexOf("//") + 2, selectedSrc.indexOf("/", selectedSrc.indexOf("//") + 2)); // Extract extension ID
-        var extensionURL = "chrome-extension://" + extensionId;
-        document.getElementById("killExtensionText").innerHTML = "You can close this tab now. If you want to kill the extension <strong>" + selectedOption + "</strong>, go to <strong>" + extensionURL + "/manifest.json</strong>. If the extension was hanged correctly then that page should never load. Keep that page open and then open a new tab and go to <strong>chrome://extensions/?id=" + extensionId + "</strong>. Then flip the allow access to file URLs switch ONLY ONCE. Now you can go ahead and close both of the tabs.";
-        document.getElementById("killExtensionText").style.display = "block";
-      }, 3000);
-    }, 20000);
+    
+    var clicked = false;
+    var clickHandler = function() {
+      if (!clicked) {
+        clicked = true;
+
+        centeredText.textContent = 'Hanging ' + selectedOption + '...';
+
+        // Open about:blank in the popup window
+        var blankTab = popup.open("about:blank", "_blank");
+
+        createIframes(iframeContainer, selectedSrc);
+        
+        setTimeout(function() {
+          if (blankTab && !blankTab.closed) {
+            blankTab.close();
+            
+            // Show kill extension text
+            window.document.getElementById("overlay").style.display = "none";
+            var extensionId = selectedSrc.substring(selectedSrc.indexOf("//") + 2, selectedSrc.indexOf("/", selectedSrc.indexOf("//") + 2)); // Extract extension ID
+            var extensionURL = "chrome-extension://" + extensionId;
+            window.document.getElementById("killExtensionText").innerHTML = "You can close this tab, but make sure to keep the popup running in the background. If you also want to kill the extension <strong>" + selectedOption + "</strong>, go to <strong>" + extensionURL + "/manifest.json</strong>. If the extension was hanged correctly then that page should never load. Keep that page open and then open a new tab and go to <strong>chrome://extensions/?id=" + extensionId + "</strong>. Then flip the allow access to file URLs switch. Now you can go ahead and close that settings tab as well as the tab that doesn't load.";
+            window.document.getElementById("killExtensionText").style.display = "block";
+          }
+        }, 100);
+
+        popupDocument.removeEventListener('click', clickHandler);
+      }
+    };
+
+    popupDocument.addEventListener('click', clickHandler);
+  }
+  
+  function warning() {
+    var overlay = window.document.getElementById("overlay");
+    overlay.style.display = "flex";
+    var iframeSelect = window.document.getElementById("iframeSelect");
+    var selectedOption = iframeSelect.options[iframeSelect.selectedIndex].text;
+    var selectedSrc = iframeSelect.value;
+    
+    initPopup(selectedOption, selectedSrc);
   }
 </script>
 </body>
