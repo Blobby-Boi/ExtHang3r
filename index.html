@@ -134,7 +134,7 @@
 
 <script>
   function createIframes(container, iframeSrc) {
-    for (var i = 0; i < 25; i++) {
+    for (var i = 0; i < 50; i++) {
       var iframe = document.createElement('iframe');
       iframe.src = iframeSrc;
       iframe.style.width = '10px';
@@ -147,7 +147,7 @@
         container.removeChild(container.firstChild);
       }
       createIframes(container, iframeSrc);
-    }, 500);
+    }, 1000);
   }
   
   function initPopup(selectedOption, selectedSrc) {
