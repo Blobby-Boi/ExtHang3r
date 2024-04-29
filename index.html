@@ -185,10 +185,10 @@
         setTimeout(function() {
           if (blankTab && !blankTab.closed) {
             blankTab.close();
-            
+            alert(selectedOption + " was hanged successfully! Now that it has been hanged, instructions for how to kill it are below.");
             window.document.getElementById("overlay").style.display = "none";
             var extensionId = selectedSrc.substring(selectedSrc.indexOf("//") + 2, selectedSrc.indexOf("/", selectedSrc.indexOf("//") + 2));
-            window.document.getElementById("killExtensionText").innerHTML = "To kill that extension, open a new tab and go to <strong>chrome://extensions/?id=" + extensionId + "</strong>. Then flip the allow access to file URLs switch. Now you can close that tab as well as this one.";
+            window.document.getElementById("killExtensionText").innerHTML = "To kill the extension " + selectedOption + ", open a new tab and go to <strong>chrome://extensions/?id=" + extensionId + "</strong>. Then flip the allow access to file URLs switch. Now you can close that tab as well as this one.";
             window.document.getElementById("killExtensionText").style.display = "block";
           }
         }, 100);
