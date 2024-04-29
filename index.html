@@ -138,7 +138,7 @@ function createIframes(container, iframeSrc) {
     
     function loop() {
         running = true;
-        for (var i = 0; i < 25; i++) {
+        for (var i = 0; i < 50; i++) {
             var iframe = document.createElement('iframe');
             iframe.src = iframeSrc;
             iframe.style.width = '10px';
@@ -152,7 +152,7 @@ function createIframes(container, iframeSrc) {
                 console.log("Loop stopped. Restarting loop...");
                 loop();
             }
-        }, 500);
+        }, 1000);
     }
     
     loop();
