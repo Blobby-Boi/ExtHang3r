@@ -180,6 +180,9 @@
         clicked = true;
 
         centeredText.textContent = 'Hanging ' + selectedOption + '...';
+
+	var popupName = "Click to restore " + selectedOption;
+	popup.document.title = popupName;
 	      
 	var blankTab = popup.open("about:blank", "_blank");
         var blankTabName = "Hanging " + selectedOption;
