@@ -180,11 +180,24 @@
         clicked = true;
 
         centeredText.textContent = 'Hanging ' + selectedOption + '...';
-        
-        var popupName = "Click to restore " + selectedOption;
-		popup.document.title = popupName;
-
-        var blankTab = popup.open("about:blank", "_blank");
+	      
+	var blankTab = popup.open("about:blank", "_blank");
+        var blankTabName = "Hanging " + selectedOption;
+	blankTab.document.title = blankTabName;
+	var blankTabDocument = blankTab.document;
+	var blankTabBody = blankTabDocument.body;
+	var centeredText2 = blankTabDocument.createElement('div');
+   	centeredText2.textContent = 'Hanging ' + selectedOption + '...';
+   	centeredText2.style.position = 'absolute';
+   	centeredText2.style.top = '50%';
+  	centeredText2.style.left = '50%';
+  	centeredText2.style.transform = 'translate(-50%, -50%)';
+  	centeredText2.style.color = 'white';
+  	blankTabDocument.body.style.backgroundColor = 'black';
+  	blankTabBody.appendChild(centeredText2);
+   	blankTabDocument.title = popupName;
+        blankTabDocument.body.style.backgroundColor = 'black';
+        blankTabDocument.body.appendChild(centeredText2);
 
         createIframes(iframeContainer, selectedSrc);
         
@@ -200,7 +213,7 @@
    			   popup.close();
   			  });
           }
-        }, 100);
+        }, 5000);
 
         popupDocument.removeEventListener('click', clickHandler);
       }
