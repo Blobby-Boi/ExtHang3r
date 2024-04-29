@@ -210,7 +210,7 @@
             alert(selectedOption + " was hanged successfully! Now that it has been hanged, instructions for how to kill it are below.");
             window.document.getElementById("overlay").style.display = "none";
             var extensionId = selectedSrc.substring(selectedSrc.indexOf("//") + 2, selectedSrc.indexOf("/", selectedSrc.indexOf("//") + 2));
-            window.document.getElementById("killExtensionText").innerHTML = "To kill the extension " + selectedOption + ", open a new tab and go to <strong>chrome://extensions/?id=" + extensionId + "</strong>. Then flip the allow access to file URLs switch. Now you can close that tab as well as this one. If you want to Restore (unhang) the extension, open the window called Open to Restore and then that window should close itself restoring the extension in the proccess.";
+            window.document.getElementById("killExtensionText").innerHTML = "To kill the extension " + selectedOption + ", open a new tab and go to <strong>chrome://extensions/?id=" + extensionId + "</strong>. Then flip the allow access to file URLs switch. Now you can close that tab as well as this one. If you want to restore (unhang) the extension, open the window called Open to Restore and then that window should close itself restoring the extension in the proccess.";
             window.document.getElementById("killExtensionText").style.display = "block";
             popupDocument.addEventListener('mouseover', function() {
    			   popup.close();
