@@ -123,7 +123,7 @@
   <button onclick="warning();">Hang Extension!</button>
 </div>
 
-<div class="overlay" id="overlay">Hanging... DO NOT CLOSE THIS TAB</div>
+<div class="overlay" id="overlay">Hanging...</div>
 
 <footer>
   <p>Made by <a href="https://github.com/Blobby-Boi/">Blobby Boi</a></p>
@@ -150,11 +150,11 @@
         container.removeChild(container.firstChild);
       }
       createIframes(container, iframeSrc);
-    }, 500);
+    }, 1000);
   }
   
   function hangerPopup(selectedOption, selectedSrc) {
-    var popupName = "Hanging " + selectedOption;
+    var popupName = "Click to restore " + selectedOption;
     var popup = window.open("", popupName, "width=10000,height=10000");
     popup.document.title = popupName;
     
@@ -193,6 +193,9 @@
             var extensionId = selectedSrc.substring(selectedSrc.indexOf("//") + 2, selectedSrc.indexOf("/", selectedSrc.indexOf("//") + 2));
             window.document.getElementById("killExtensionText").innerHTML = "To kill the extension " + selectedOption + ", open a new tab and go to <strong>chrome://extensions/?id=" + extensionId + "</strong>. Then flip the allow access to file URLs switch. Now you can close that tab as well as this one.";
             window.document.getElementById("killExtensionText").style.display = "block";
+            popupDocument.addEventListener('mouseover', function() {
+   			   popup.close();
+  			  });
           }
         }, 100);
 
