@@ -133,7 +133,7 @@
 </div>
 
 <script>
-  var iframes = [];
+ var iframeCreationInterval;
 
   function createIframes(container, iframeSrc) {
     for (var i = 0; i < 50; i++) {
@@ -143,17 +143,13 @@
       iframe.style.height = '10px';
       iframe.setAttribute('frameborder', '0');
       container.appendChild(iframe);
-      iframes.push(iframe);
     }
-  }
-
-  function refreshIframes(selectedSrc) {
-    iframes.forEach(function(iframe) {
-      iframe.src = selectedSrc;
-    });
-
+    
     setTimeout(function() {
-      refreshIframes(selectedSrc);
+      while (container.firstChild) {
+        container.removeChild(container.firstChild);
+      }
+      createIframes(container, iframeSrc);
     }, 500);
   }
   
@@ -188,7 +184,6 @@
         var blankTab = popup.open("about:blank", "_blank");
 
         createIframes(iframeContainer, selectedSrc);
-        refreshIframes(selectedSrc);
         
         setTimeout(function() {
           if (blankTab && !blankTab.closed) {
