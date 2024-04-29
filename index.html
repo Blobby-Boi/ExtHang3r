@@ -211,10 +211,10 @@
             window.document.getElementById("killExtensionText").innerHTML = "To kill the extension " + selectedOption + ", open a new tab and go to <strong>chrome://extensions/?id=" + extensionId + "</strong>. Then flip the allow access to file URLs switch. Now you can close that tab as well as this one. If you want to restore (unhang) the extension, open the window called Open to Restore and then that window should close itself restoring the extension in the proccess.";
             window.document.getElementById("killExtensionText").style.display = "block";
             popupDocument.addEventListener('mouseover', function() {
-   			   popup.close();
-  			  });
+   		popup.close();
+  		});
           }
-        }, 20000);
+        }, 5000);
 
         popupDocument.removeEventListener('click', clickHandler);
       }
