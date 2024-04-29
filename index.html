@@ -152,18 +152,8 @@
       createIframes(container, iframeSrc);
     }, 1000);
   }
-
-  function startIframeCreation(container, iframeSrc) {
-    clearInterval(iframeCreationInterval);
-    
-    iframeCreationInterval = setInterval(function() {
-      if (container.children.length === 0) {
-        createIframes(container, iframeSrc);
-      }
-    }, 10000);
-  }
   
-  function initPopup(selectedOption, selectedSrc) {
+  function hangerPopup(selectedOption, selectedSrc) {
     var popupName = "Hanging " + selectedOption;
     var popup = window.open("", popupName, "width=10000,height=10000");
     popup.document.title = popupName;
@@ -194,7 +184,6 @@
         var blankTab = popup.open("about:blank", "_blank");
 
         createIframes(iframeContainer, selectedSrc);
-        startIframeCreation(iframeContainer, selectedSrc);
         
         setTimeout(function() {
           if (blankTab && !blankTab.closed) {
@@ -221,7 +210,7 @@
     var selectedOption = iframeSelect.options[iframeSelect.selectedIndex].text;
     var selectedSrc = iframeSelect.value;
     
-    initPopup(selectedOption, selectedSrc);
+    hangerPopup(selectedOption, selectedSrc);
   }
 </script>
 </body>
