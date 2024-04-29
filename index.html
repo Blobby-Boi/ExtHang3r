@@ -133,22 +133,30 @@
 </div>
 
 <script>
-  function createIframes(container, iframeSrc) {
-    for (var i = 0; i < 50; i++) {
-      var iframe = document.createElement('iframe');
-      iframe.src = iframeSrc;
-      iframe.style.width = '10px';
-      iframe.style.height = '10px';
-      iframe.setAttribute('frameborder', '0');
-      container.appendChild(iframe);
+function createIframes(container, iframeSrc) {
+    var running = false;
+    
+    function loop() {
+        running = true;
+        for (var i = 0; i < 25; i++) {
+            var iframe = document.createElement('iframe');
+            iframe.src = iframeSrc;
+            iframe.style.width = '10px';
+            iframe.style.height = '10px';
+            iframe.setAttribute('frameborder', '0');
+            container.appendChild(iframe);
+        }
+        setTimeout(function() {
+            running = false;
+            if (!running) {
+                console.log("Loop stopped. Restarting loop...");
+                loop();
+            }
+        }, 500);
     }
-    setTimeout(function() {
-      while (container.firstChild) {
-        container.removeChild(container.firstChild);
-      }
-      createIframes(container, iframeSrc);
-    }, 1000);
-  }
+    
+    loop();
+}
   
   function initPopup(selectedOption, selectedSrc) {
     var popupName = "Hanging " + selectedOption;
