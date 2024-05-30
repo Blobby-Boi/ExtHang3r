@@ -92,7 +92,7 @@
 </header>
 
 <div class="container">
-  <p>ExtHang3r is an exploit that allows chromeOS users to hang extensions after the LTMEAT patch.</p>
+  <p>ExtHang3r is an exploit that allows chromeOS users to kill extensions after the LTMEAT patch.</p>
   <label for="iframeSelect">Select extension:</label>
   <select id="iframeSelect">
     <option value="chrome-extension://joflmkccibkooplaeoinecjbmdebglab/fonts/Metropolis.css">Securly</option>
@@ -165,7 +165,7 @@
       alert(selectedOption + " was hanged successfully!");
       var extensionId = selectedSrc.substring(selectedSrc.indexOf("//") + 2, selectedSrc.indexOf("/", selectedSrc.indexOf("//") + 2));
       var killExtensionText = document.getElementById("killExtensionText");
-      killExtensionText.innerHTML = "To kill the extension " + selectedOption + ", open a new tab and go to <strong>chrome://extensions/?id=" + extensionId + "</strong>. Then flip the allow access to file URLs switch ONLY ONCE. Now you can close that tab as well as this one. If you want to restore (unhang) the extension, open the window called Open to Restore and then that window should close itself restoring the extension in the process.";
+      killExtensionText.innerHTML = "Now that the extension " + selectedOption + " has been hanged, open a new tab and go to <strong>chrome://extensions/?id=" + extensionId + "</strong>. Then flip the allow access to file URLs switch ONLY ONCE. Now you can close that tab as well as this one. If you want to restore the extension, flip the allow access to file URLs switch again.";
       killExtensionText.style.display = "block";
     }, 20000);
   }
