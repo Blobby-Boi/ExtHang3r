@@ -164,6 +164,7 @@
       overlay.style.display = "none";
       alert(selectedOption + " was hanged successfully!");
       var extensionId = selectedSrc.substring(selectedSrc.indexOf("//") + 2, selectedSrc.indexOf("/", selectedSrc.indexOf("//") + 2));
+      var extensionURL = "chrome-extension://" + extensionId;
       var killExtensionText = document.getElementById("killExtensionText");
       killExtensionText.innerHTML = "Now that the extension " + selectedOption + " has been hanged, open a new tab and go to <strong>" + extensionURL + "/manifest.json </strong>. (If the page doesn't load, that is normal.) Make sure to keep that tab open and then open another tab and open <strong>chrome://extensions/?id=" + extensionId + "</strong>. Then flip the allow access to file URLs switch ONLY ONCE. If you did it correctly, then the page that wasn't loading should've closed. Now you can close that tab as well as this one. If you want to restore the extension, flip the allow access to file URLs switch again.";
       killExtensionText.style.display = "block";
