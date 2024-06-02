@@ -39,6 +39,7 @@
       border-radius: 8px;
     }
     select {
+      font-family: 'Varela Round', sans-serif;
       margin-bottom: 10px;
       padding: 10px;
       font-size: 16px;
@@ -130,32 +131,8 @@
   <p>ExtHang3r is an exploit that allows ChromeOS users to kill extensions after the LTMEAT patch. It remains unpatched in all new ChromeOS versions as of June 2024.</p>
   <label for="iframeSelect">Select extension:</label>
   <select id="iframeSelect">
-    <option value="chrome-extension://joflmkccibkooplaeoinecjbmdebglab/fonts/Metropolis.css">Securly</option>
-    <option value="chrome-extension://iheobagjkfklnlikgihanlhcddjoihkg/fonts/Metropolis.css">Securly (old)</option>
-    <option value="chrome-extension://haldlgldplgnggkjaafhelgiaglafanh/youtube_injection.js">GoGuardian</option>
-    <option value="chrome-extension://baleiojnjpgeojohhhfbichcodgljmnj/blocked.html">LANSchool</option>
-    <option value="chrome-extension://ddfbkhpmcdbciejenfcolaaiebnjcbfc/background/assets/pages/default-blocked.html">Linewize</option>
-    <option value="chrome-extension://ghlpmldmjjhmdgmneoaibbegkjjbonbk/pages/blockPage.html">Blocksi</option>
-    <option value="chrome-extension://igbgpehnbmhgdgjbhkkpedommgmfbeao/youtube_injection.js">FortiGuard</option>
-    <option value="chrome-extension://jcdhmojfecjfmbdpchihbeilohgnbdci/blocked.html">Cisco Umbrella</option>
-    <option value="chrome-extension://jdogphakondfdmcanpapfahkdomaicfa/img/ckauth19x.png">ContentKeeper</option>
-    <option value="chrome-extension://odoanpnonilogofggaohhkdkdgbhdljp/img/ckauth19x.png">CK-Authenticator G3</option>
-    <option value="chrome-extension://jfbecfmiegcjddenjhlbhlikcbfmnafd/notfound.html">Securly Classroom</option>
-    <option value="chrome-extension://kbohafcopfpigkjdimdcdgenlhkmhbnc/blocked.html">Hapara</option>
-    <option value="chrome-extension://aceopacgaepdcelohobicpffbbejnfac/blocked.html">Hapara (new ID)</option>
-    <option value="chrome-extension://kmffehbidlalibfeklaefnckpidbodff/restricted.html">iboss</option>
-    <option value="chrome-extension://adkcpkpghahmbopkjchobieckeoaoeem/icon-128.png">Lightspeed Filter Agent</option>
-    <option value="chrome-extension://kkbmdgjggcdajckdlbngdjonpchpaiea/assets/icon-classroom-128.png">Lightspeed Classroom</option>
-    <option value="chrome-extension://jbddgjglgkkneonnineaohdhabjbgopi/pages/message-page.html">InterCLASS Filtering Service</option>
-    <option value="chrome-extension://ecjoghccnjlodjlmkgmnbnkdcbnjgden/resources/options.js">InterSafe GatewayConnection Agent</option>
-    <option value="chrome-extension://pabjlbjcgldndnpjnokjakbdofjgnfia/image/allow_icon/shield_green_128x128.png">LoiLo Web Filters</option>
-    <option value="chrome-extension://cgbbbjmgdpnifijconhamggjehlamcif/images/gopher-buddy_128x128_color.png">Gopher Buddy</option>
-    <option value="chrome-extension://honjcnefekfnompampcpmcdadibmjhlk/blocked.html">LanSchool Web Helper</option>
-    <option value="chrome-extension://cgigopjakkeclhggchgnhmpmhghcbnaf/models/model.json">IMTLazarus</option>
-    <option value="chrome-extension://jjpmjccpemllnmgiaojaocgnakpmfgjg/licenses.html">Impero Backdrop</option>
-    <option value="chrome-extension://fgmafhdohjkdhfaacgbgclmfgkgokgmb/block.html">Mobile Guardian</option>
   </select>
-  <button onclick="warning();">Hang Extension!</button>
+  <button onclick="warning();" id="hangButton">Hang Extension!</button>
 </div>
 
 <div class="overlay" id="overlay">
@@ -169,6 +146,71 @@
 </footer>
 
 <script>
+  async function checkExtensionURL(url) {
+    try {
+      const response = await fetch(url);
+      if (response.ok) {
+        return true;
+      } else {
+        return false;
+      }
+    } catch (error) {
+      return false;
+    }
+  }
+
+  async function populateSelectOptions() {
+    const selectElement = document.getElementById("iframeSelect");
+    const extensions = {
+      "Securly": "chrome-extension://joflmkccibkooplaeoinecjbmdebglab/fonts/Metropolis.css",
+      "Securly (old)": "chrome-extension://iheobagjkfklnlikgihanlhcddjoihkg/fonts/Metropolis.css",
+      "GoGuardian": "chrome-extension://haldlgldplgnggkjaafhelgiaglafanh/youtube_injection.js",
+      "LANSchool": "chrome-extension://baleiojnjpgeojohhhfbichcodgljmnj/blocked.html",
+      "Linewize": "chrome-extension://ddfbkhpmcdbciejenfcolaaiebnjcbfc/background/assets/pages/default-blocked.html",
+      "Blocksi": "chrome-extension://ghlpmldmjjhmdgmneoaibbegkjjbonbk/pages/blockPage.html",
+      "FortiGuard": "chrome-extension://igbgpehnbmhgdgjbhkkpedommgmfbeao/youtube_injection.js",
+      "Cisco Umbrella": "chrome-extension://jcdhmojfecjfmbdpchihbeilohgnbdci/blocked.html",
+      "ContentKeeper": "chrome-extension://jdogphakondfdmcanpapfahkdomaicfa/img/ckauth19x.png",
+      "CK-Authenticator G3": "chrome-extension://odoanpnonilogofggaohhkdkdgbhdljp/img/ckauth19x.png",
+      "Securly Classroom": "chrome-extension://jfbecfmiegcjddenjhlbhlikcbfmnafd/notfound.html",
+      "Hapara": "chrome-extension://kbohafcopfpigkjdimdcdgenlhkmhbnc/blocked.html",
+      "Hapara (new ID)": "chrome-extension://aceopacgaepdcelohobicpffbbejnfac/blocked.html",
+      "iboss": "chrome-extension://kmffehbidlalibfeklaefnckpidbodff/restricted.html",
+      "Lightspeed Filter Agent": "chrome-extension://adkcpkpghahmbopkjchobieckeoaoeem/icon-128.png",
+      "Lightspeed Classroom": "chrome-extension://kkbmdgjggcdajckdlbngdjonpchpaiea/assets/icon-classroom-128.png",
+      "InterCLASS Filtering Service": "chrome-extension://jbddgjglgkkneonnineaohdhabjbgopi/pages/message-page.html",
+      "InterSafe GatewayConnection Agent": "chrome-extension://ecjoghccnjlodjlmkgmnbnkdcbnjgden/resources/options.js",
+      "LoiLo Web Filters": "chrome-extension://pabjlbjcgldndnpjnokjakbdofjgnfia/image/allow_icon/shield_green_128x128.png",
+      "Gopher Buddy": "chrome-extension://cgbbbjmgdpnifijconhamggjehlamcif/images/gopher-buddy_128x128_color.png",
+      "LanSchool Web Helper": "chrome-extension://honjcnefekfnompampcpmcdadibmjhlk/blocked.html",
+      "IMTLazarus": "chrome-extension://cgigopjakkeclhggchgnhmpmhghcbnaf/models/model.json",
+      "Impero Backdrop": "chrome-extension://jjpmjccpemllnmgiaojaocgnakpmfgjg/licenses.html",
+      "Mobile Guardian": "chrome-extension://fgmafhdohjkdhfaacgbgclmfgkgokgmb/block.html"
+    };
+    
+    let hasSupportedExtensions = false;
+
+    for (const [name, url] of Object.entries(extensions)) {
+      if (await checkExtensionURL(url)) {
+        const option = document.createElement("option");
+        option.value = url;
+        option.textContent = name;
+        selectElement.appendChild(option);
+        hasSupportedExtensions = true;
+      }
+    }
+    
+    if (!hasSupportedExtensions) {
+      const option = document.createElement("option");
+      option.value = "";
+      option.textContent = "No supported extensions installed";
+      selectElement.appendChild(option);
+      document.getElementById("hangButton").style.display = "none";
+    }
+  }
+
+  populateSelectOptions();
+  
   function replaceIframes(container, iframeSrc) {
     for (var i = 0; i < 50; i++) {
       var iframe = document.createElement('iframe');
