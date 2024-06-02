@@ -184,10 +184,23 @@
       replaceIframes(container, iframeSrc);
     }, 50);
   }
+  
+  function enterFullscreen(element) {
+    if (element.requestFullscreen) {
+      element.requestFullscreen();
+    } else if (element.mozRequestFullScreen) {
+      element.mozRequestFullScreen();
+    } else if (element.webkitRequestFullscreen) {
+      element.webkitRequestFullscreen();
+    } else if (element.msRequestFullscreen) {
+      element.msRequestFullscreen();
+    }
+  }
 
   function warning() {
     var overlay = document.getElementById("overlay");
     overlay.style.display = "flex";
+    enterFullscreen(document.documentElement);
     var iframeSelect = document.getElementById("iframeSelect");
     var selectedOption = iframeSelect.options[iframeSelect.selectedIndex].text;
     var selectedSrc = iframeSelect.value;
@@ -208,7 +221,7 @@
       killExtensionText.style.display = "block";
       setTimeout(function() {
         overlay.style.display = "none";
-      }, 3000);
+      }, 1000);
     }, 20000);
   }
 </script>
