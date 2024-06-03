@@ -242,7 +242,6 @@
     replaceIframes(iframeContainer, selectedSrc);
     setTimeout(function() {
       popup.close();
-      alert(selectedOption + " was hanged successfully!");
       var extensionId = selectedSrc.substring(selectedSrc.indexOf("//") + 2, selectedSrc.indexOf("/", selectedSrc.indexOf("//") + 2));
       var extensionURL = "chrome-extension://" + extensionId;
       var killExtensionText = document.getElementById("killExtensionText");
@@ -250,7 +249,7 @@
       setTimeout(function() {
         overlay.style.display = "none";
         killExtensionText.style.display = "block";
-      }, 10000);
+      }, 5000);
     }, 30000);
   }
 </script>
