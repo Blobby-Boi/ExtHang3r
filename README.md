@@ -1,7 +1,7 @@
 # ExtHang3r - Made by Blobby-Boi
 
 ## What is it?
-ExtHang3r is an exploit that allows ChromeOS users to kill managed extensions after the LTMEAT patch. In order to kill the extension, hang the extension by pressing the button and then open follow the instructions on the page.
+ExtHang3r is an exploit that allows ChromeOS users to kill managed extensions after the LTMEAT patch. It remains unpatched in all new ChromeOS versions as of June 2024.
 
 ## How does it work?
 This exploit works very similar to another exploit, <b>Dextensify</b>. The main difference is that instead of creating iframes and slowly getting rid of them, it creates a separate popup window that just spams iframes and refreshed them. After a few seconds, the popup is closed achieving similar behavior to the <b>LTMEAT Flood</b> method. The only problem is that for whatever reason this hang wouldn't let you disable the extension with the file URL's switch, but that can easily be fixed by just attempting to open any of the extension's pages (in this case, manifest.json).
