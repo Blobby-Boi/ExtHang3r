@@ -153,7 +153,7 @@
 
 <div class="overlay" id="overlay">
   <div class="spinner"></div>
-  Hanging... (This will take about 30 seconds)
+  Hanging... (This will take about 1 minute)
 </div>
 <div id="killExtensionText"></div>
 
@@ -261,7 +261,7 @@
       var extensionId = selectedSrc.substring(selectedSrc.indexOf("//") + 2, selectedSrc.indexOf("/", selectedSrc.indexOf("//") + 2));
       var extensionURL = "chrome-extension://" + extensionId;
       var killExtensionText = document.getElementById("killExtensionText");
-      killExtensionText.innerHTML = "Now that the extension " + selectedOption + " has been hanged, press the button above. Keep this tab open, then in a new tab open <strong>chrome://extensions/?id=" + extensionId + "</strong> Flip the switch called allow access to file URLs twice. Now you can close that tab as well as this one. If you want to restore the extension, flip the allow access to file URLs switch again.";
+      killExtensionText.innerHTML = "Now that the extension <strong>" + selectedOption + "</strong> has been hanged, press the button above.";
       setTimeout(function() {
         overlay.style.display = "none";
         killExtensionText.style.display = "block";
@@ -270,13 +270,16 @@
 	document.getElementById("iframeSelect").style.display = "none";
 	document.getElementById("labelForIframeSelect").style.display = "none";
         document.getElementById("killButton").setAttribute("data-url", selectedSrc);
-      }, 20000);
+      }, 10000);
     }, 5000);
   }
 
   function openExtensionPopup() {
     var selectedSrc = document.getElementById("killButton").getAttribute("data-url");
+    var extensionId = selectedSrc.substring(selectedSrc.indexOf("//") + 2, selectedSrc.indexOf("/", selectedSrc.indexOf("//") + 2));
+    var killExtensionText = document.getElementById("killExtensionText");
     document.getElementById("killButton").style.display = "none";
+    killExtensionText.innerHTML = "Make sure to keep this tab open. Then in a new tab open <strong>chrome://extensions/?id=" + extensionId + "</strong> Flip the switch called allow access to file URLs twice. The extension was successfully killed! Now you can close that tab as well as this one. If you want to restore the extension, flip the allow access to file URLs switch again.";
     window.location.href = selectedSrc;
   }
 </script>
