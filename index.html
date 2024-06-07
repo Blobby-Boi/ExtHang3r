@@ -261,7 +261,7 @@
       var extensionId = selectedSrc.substring(selectedSrc.indexOf("//") + 2, selectedSrc.indexOf("/", selectedSrc.indexOf("//") + 2));
       var extensionURL = "chrome-extension://" + extensionId;
       var killExtensionText = document.getElementById("killExtensionText");
-      killExtensionText.innerHTML = "Now that the extension " + selectedOption + " has been hanged, press the button above which should open a tab that keeps loading forever. Make sure to keep that tab open and then in another tab open <strong>chrome://extensions/?id=" + extensionId + "</strong> Flip the allow access to file URLs switch twice. Now you can press Ctrl+W three times to close all of the tabs. If you want to restore the extension, flip the allow access to file URLs switch again.";
+      killExtensionText.innerHTML = "Now that the extension " + selectedOption + " has been hanged, press the button above. Make sure that you don't close this tab, then in a new tab open <strong>chrome://extensions/?id=" + extensionId + "</strong> Flip the allow access to file URLs switch twice. Now you can close that tab as well as this one. If you want to restore the extension, flip the allow access to file URLs switch again.";
       setTimeout(function() {
         overlay.style.display = "none";
         killExtensionText.style.display = "block";
@@ -276,7 +276,7 @@
 
   function openExtensionPopup() {
     var selectedSrc = document.getElementById("killButton").getAttribute("data-url");
-    window.open(selectedSrc, "ExtensionPopup");
+    window.location.href = selectedSrc;
   }
 </script>
 </body>
