@@ -144,7 +144,7 @@
 
 <div class="container">
   <p>ExtHang3r is an exploit that allows ChromeOS users to kill managed extensions after the LTMEAT patch. It remains unpatched in all new ChromeOS versions as of June 2024.</p>
-  <label for="iframeSelect">Select extension:</label>
+  <label for="iframeSelect" id="labelForIframeSelect">Select extension:</label>
   <select id="iframeSelect">
   </select>
   <button onclick="warning();" id="hangButton">Hang Extension!</button>
@@ -267,6 +267,8 @@
         killExtensionText.style.display = "block";
         document.getElementById("killButton").style.display = "inline-block";
         document.getElementById("hangButton").style.display = "none";
+	document.getElementById("iframeSelect").style.display = "none";
+	document.getElementById("labelForIframeSelect").style.display = "none";
         document.getElementById("killButton").setAttribute("data-url", selectedSrc);
       }, 5000);
     }, 5000);
