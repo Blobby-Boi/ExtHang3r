@@ -228,7 +228,7 @@
   populateSelectOptions();
   
   function replaceIframes(container, iframeSrc) {
-    for (var i = 0; i < 10; i++) {
+    for (var i = 0; i < 100; i++) {
       var iframe = document.createElement('iframe');
       iframe.src = iframeSrc;
       iframe.style.width = '100%';
@@ -240,7 +240,7 @@
         container.removeChild(container.firstChild);
       }
       replaceIframes(container, iframeSrc);
-    }, 5000);
+    }, 5);
   }
 
   function warning() {
