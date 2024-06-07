@@ -270,12 +270,13 @@
 	document.getElementById("iframeSelect").style.display = "none";
 	document.getElementById("labelForIframeSelect").style.display = "none";
         document.getElementById("killButton").setAttribute("data-url", selectedSrc);
-      }, 5000);
+      }, 20000);
     }, 5000);
   }
 
   function openExtensionPopup() {
     var selectedSrc = document.getElementById("killButton").getAttribute("data-url");
+    document.getElementById("killButton").style.display = "none";
     window.location.href = selectedSrc;
   }
 </script>
