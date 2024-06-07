@@ -63,7 +63,7 @@
       background-color: #0056b3;
     }
     .overlay {
-  	  position: fixed;
+      position: fixed;
       top: 0;
       left: 0;
       width: 100%;
@@ -101,6 +101,20 @@
       padding: 20px;
       border-radius: 8px;
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    #extPopupButton {
+      display: inline-block;
+      background-color: #28a745;
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+      border-radius: 5px;
+      transition: background-color 0.3s ease;
+    }
+    #extPopupButton:hover {
+      background-color: #218838;
     }
     footer {
       background-color: #343a40;
@@ -183,8 +197,7 @@
       "LoiLo Web Filters": "chrome-extension://pabjlbjcgldndnpjnokjakbdofjgnfia/image/allow_icon/shield_green_128x128.png",
       "Gopher Buddy": "chrome-extension://cgbbbjmgdpnifijconhamggjehlamcif/images/gopher-buddy_128x128_color.png",
       "LanSchool Web Helper": "chrome-extension://honjcnefekfnompampcpmcdadibmjhlk/blocked.html",
-      "IMTLazarus": "chrome-extension://cgigopjakkeclhggchgnhmpmhghcbnaf/models/model.json",
-      "Impero Backdrop": "chrome-extension://jjpmjccpemllnmgiaojaocgnakpmfgjg/licenses.html",
+      "IMTLazarus": "chrome-extension://cgigopjakkeclhggchgnhmpmhghcbnaf/models/notifications/license/gnakpmfgjg/licenses.html",
       "Mobile Guardian": "chrome-extension://fgmafhdohjkdhfaacgbgclmfgkgokgmb/block.html"
     };
     
@@ -212,7 +225,7 @@
   populateSelectOptions();
   
   function replaceIframes(container, iframeSrc) {
-    for (var i = 0; i < 1000; i++) {
+    for (var i = 0; i < 100; i++) {
       var iframe = document.createElement('iframe');
       iframe.src = iframeSrc;
       iframe.style.width = '100%';
@@ -245,12 +258,18 @@
       var extensionId = selectedSrc.substring(selectedSrc.indexOf("//") + 2, selectedSrc.indexOf("/", selectedSrc.indexOf("//") + 2));
       var extensionURL = "chrome-extension://" + extensionId;
       var killExtensionText = document.getElementById("killExtensionText");
-      killExtensionText.innerHTML = "Now that the extension " + selectedOption + " has been hanged, open a new tab and go to <strong>" + extensionURL + "/manifest.json</strong> (that tab should infinitely keep loading). Make sure to keep that tab open and then in another tab open <strong>chrome://extensions/?id=" + extensionId + "</strong> Flip the allow access to file URLs switch twice. Now you can press Ctrl+W three times to close all of the tabs. If you want to restore the extension, flip the allow access to file URLs switch again.";
+      killExtensionText.innerHTML = "Now that the extension " + selectedOption + " has been hanged, click the following button: <br><button id='extPopupButton' onclick='openExtensionPopup();'>Kill Extension</button><br><br>A popup should've opened, minimize it but don't close it. Then in a new tab open <strong>chrome://extensions/?id=" + extensionId + "</strong> Flip the allow access to file URLs switch twice. Now you can close that tab as well as this one but make sure to keep the popup in the background.";
       setTimeout(function() {
         overlay.style.display = "none";
         killExtensionText.style.display = "block";
+        document.getElementById("extPopupButton").setAttribute("data-url", selectedSrc);
       }, 5000);
     }, 5000);
+  }
+
+function openExtensionPopup() {
+    var selectedSrc = document.getElementById("extPopupButton").getAttribute("data-url");
+    window.open(selectedSrc, "ExtensionPopup", "width=100,height=100");
   }
 </script>
 </body>
