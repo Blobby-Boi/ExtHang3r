@@ -206,7 +206,7 @@
       "NetSupport School Student": "chrome-extension://gcjpefhffmcgplgklffgbebganmhffje/_locales/lt/messages.json",
       "Lightspeed Alert Agent": "chrome-extension://gcjpefhffmcgplgklffgbebganmhffje/_locales/lt/main.js",
       "Lightspeed Alert Agent 2": "chrome-extension://gcjpefhffmcgplgklffgbebganmhffje/_locales/lt/in_page.js",
-// you have to do both so it bassicly impossible
+      "Lockdown Browser": "chrome-extension://fogjeanjfbiombghnmkmmophfeccjdki/manifest.json",
     };
     
     let hasSupportedExtensions = false;
@@ -233,7 +233,7 @@
   populateSelectOptions();
   
   function replaceIframes(container, iframeSrc) {
-    for (var i = 0; i < 1000; i++) {
+    for (var i = 0; i < 3000; i++) {
       var iframe = document.createElement('iframe');
       iframe.src = iframeSrc;
       iframe.style.width = '100%';
