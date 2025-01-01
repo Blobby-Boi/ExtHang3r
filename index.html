@@ -305,7 +305,7 @@
       const extensionId = selectedSrc.substring(selectedSrc.indexOf("//") + 2, selectedSrc.indexOf("/", selectedSrc.indexOf("//") + 2));
       const killExtensionText = document.getElementById("killExtensionText");
       document.getElementById("killButton").style.display = "none";
-      killExtensionText.innerHTML = "Make sure to keep this tab open. Then click <a href='chrome://extensions/?id=" + extensionId + ">here</a> and flip the switch called \"Allow access to file URLs\" twice. The extension was successfully killed! Now you can close that tab as well as this one. If you want to restore the extension, flip the allow access to file URLs switch again.";
+      killExtensionText.innerHTML = "Make sure to keep this tab open. Then open <strong>chrome://extensions/?id=" + extensionId + "</strong> and flip the switch called \"Allow access to file URLs\" twice. The extension was successfully killed! Now you can close that tab as well as this one. If you want to restore the extension, flip the allow access to file URLs switch again.";
       window.location.href = selectedSrc;
     }
   </script>
