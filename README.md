@@ -7,7 +7,7 @@ ExtHang3r is an exploit created by <a href="https://github.com/Blobby-Boi/">Blob
 This exploit works very similar to <b>Dextensify</b>. The main difference being that instead of creating iframes and slowly getting rid of them, a separate popup window is created that spams iframes and refreshes them. After a few seconds, the popup is closed achieving similar behavior to the <b>LTMEAT Flood</b> method. This worked great in paper, but for whatever reason this hang just woudn't let you disable the extension with the file URLs switch. It would instead just restart the extension. However, a solution was quickly found and it was as simple as just attempting to load any of the extension's pages prior to flipping the switch.
 
 > [!TIP]
-> If the extensions restore themselves after a few minutes, increase the amount of iframes that are created. You can do this by going into the `replaceIframes` function in `index.html` and changing the number 3000 in this line `for (let i = 0; i < 3000; i++) {` to something higher. I recommend to try 4000 and go from there.
+> If the extensions restore themselves after a few minutes, increase the amount of iframes that are created. You can do this by going into the `replaceIframes` function in `index.html` and changing the number 3000 (the amount of times that an iframe will be created) in the line `for (let i = 0; i < 3000; i++) {` to something higher. I recommend to try 4000 and go from there.
 
 ## How do I use it?
 To use the exploit, paste the following url into your url bar. More detailed instructions are provided in the exploit's page.
