@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-
+  
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -169,6 +169,11 @@
     <label for="iframeSelect" id="labelForIframeSelect">Select extension:</label>
     <select id="iframeSelect">
     </select>
+    <label for="iframeCountSlider" style="margin-top: 20px;">The slider below changes the amount of iframes that will be created. Try it with the default first, and if the extension comes back after a few minutes increase it and try again. Pro tip: If your computer crashes, you should definitely decrease the amount of iframes.</label>
+  	<div style="display: flex; align-items: center; gap: 10px; margin: 10px 0;">
+  		<input type="range" id="iframeCountSlider" min="100" max="15000" value="2000" step="100" style="flex-grow: 1;">
+  		<span id="iframeCountValue">3000</span>
+	</div>
     <button onclick="warning();" id="hangButton">Hang Extension!</button>
     <button id="killButton" onclick="openExtensionPopup();">Kill Extension!</button>
   </div>
@@ -184,6 +189,27 @@
   </footer>
 
   <script>
+    document.addEventListener("DOMContentLoaded", function () {
+    const slider = document.getElementById("iframeCountSlider");
+    const sliderValueDisplay = document.getElementById("iframeCountValue");
+    const deviceMemory = navigator.deviceMemory || 4;
+    const defaultIframeCount = Math.round(deviceMemory * 500);  // This changes the default value of the iframe slider based on how much memory your computer has
+    const maxIframeCount = Math.round(deviceMemory * 1500);
+
+    slider.value = defaultIframeCount;
+    slider.max = maxIframeCount;
+    sliderValueDisplay.textContent = defaultIframeCount;
+
+    slider.addEventListener("input", function () {
+      sliderValueDisplay.textContent = this.value;
+    });
+  });
+  
+  	document.getElementById("iframeCountSlider").addEventListener("input", function () {
+  	  const iframeCountValue = document.getElementById("iframeCountValue");
+ 	  iframeCountValue.textContent = this.value;
+    });
+  
     async function checkExtensionURL(url) {
       try {
         const response = await fetch(url);
@@ -256,8 +282,8 @@
 
     populateSelectOptions();
 
-    function replaceIframes(container, iframeSrc) {
-      for (let i = 0; i < 3000; i++) {
+    function replaceIframes(container, iframeSrc, iframeCount) {
+      for (let i = 0; i < iframeCount; i++) {
         const iframe = document.createElement('iframe');
         iframe.src = iframeSrc;
         iframe.style.width = '100%';
@@ -278,13 +304,14 @@
       const iframeSelect = document.getElementById("iframeSelect");
       const selectedOption = iframeSelect.options[iframeSelect.selectedIndex].text;
       const selectedSrc = iframeSelect.value;
+      const iframeCount = parseInt(document.getElementById("iframeCountSlider").value, 10);
       const popup = window.open("", "PopupWindow", "width=100,height=100");
       const popupDocument = popup.document;
       const popupBody = popupDocument.body;
       const iframeContainer = popupDocument.createElement('div');
       iframeContainer.id = 'iframeContainer';
       popupBody.appendChild(iframeContainer);
-      replaceIframes(iframeContainer, selectedSrc);
+      replaceIframes(iframeContainer, selectedSrc, iframeCount);
       setTimeout(function () {
         popup.close();
         const killExtensionText = document.getElementById("killExtensionText");
