@@ -17,4 +17,4 @@ data:text/html;charset=utf-8,%3C!DOCTYPE%20html%3E%0A%3Chtml%20lang%3D%22en%22%3
 ```
 
 > [!TIP]
-> If the tab immediately closes after opening, change the beginning of the URL from `data:` to `data://`.
+> If the tab immediately closes after opening, try changing the beginning of the URL from `data:` to `data://`.
