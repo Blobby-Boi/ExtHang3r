@@ -169,7 +169,7 @@
     <label for="iframeSelect" id="labelForIframeSelect">Select extension:</label>
     <select id="iframeSelect">
     </select>
-    <label for="iframeCountSlider" style="margin-top: 20px;">The slider below changes the amount of iframes that will be created. Try it with the default first, and if the extension comes back after a few minutes increase it and try again. Tip: If your computer crashes or freezes for more than 2 minutes, you should definitely decrease the amount of iframes.</label>
+    <label for="iframeCountSlider" id="labelForIframeSlider" style="margin-top: 20px;">The slider below changes the amount of iframes that will be created. Try it with the default first, and if the extension comes back after a few minutes increase it and try again. Tip: If your computer crashes or freezes for more than 2 minutes, you should definitely decrease the amount of iframes.</label>
   	<div style="display: flex; align-items: center; gap: 10px; margin: 10px 0;">
   		<input type="range" id="iframeCountSlider" min="100" max="15000" value="2000" step="100" style="flex-grow: 1;">
   		<span id="iframeCountValue">3000</span>
@@ -323,6 +323,9 @@
           document.getElementById("hangButton").style.display = "none";
           document.getElementById("iframeSelect").style.display = "none";
           document.getElementById("labelForIframeSelect").style.display = "none";
+          document.getElementById("iframeCountSlider").style.display = "none";
+          document.getElementById("iframeCountValue").style.display = "none";
+          document.getElementById("labelForIframeSlider").style.display = "none";
           document.getElementById("killButton").setAttribute("data-url", selectedSrc);
         }, 10000);
       }, 5000);
