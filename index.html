@@ -327,10 +327,10 @@
           document.getElementById("killButton").style.display = "inline-block";
           document.getElementById("hangButton").style.display = "none";
           document.getElementById("iframeSelect").style.display = "none";
-          document.getElementById("labelForIframeSelect").style.display = "none";
+          try{document.getElementById("labelForIframeSelect").style.display = "none";}catch(err){}
           document.getElementById("iframeCountSlider").style.display = "none";
           document.getElementById("iframeCountValue").style.display = "none";
-          document.getElementById("labelForIframeSlider").style.display = "none";
+          try{document.getElementById("labelForIframeSlider").style.display = "none";}catch(err){}
           document.getElementById("killButton").setAttribute("data-url", selectedSrc);
         }, 10000);
       }, 5000);
