@@ -159,23 +159,22 @@
 <body>
 
   <header>
-    <img src="https://raw.githubusercontent.com/Blobby-Boi/ExtHang3r/refs/heads/main/favicon.png" alt="Logo" class="logo">
-    <h1>ExtHang3r</h1>
+    
+    
   </header>
 
   <div class="container">
-    <p>ExtHang3r is an exploit that allows ChromeOS users to kill managed extensions after the LTMEAT patch. It remains
-      unpatched in all new ChromeOS versions as of February 2025.</p>
-    <label for="iframeSelect" id="labelForIframeSelect">Select extension:</label>
+    
+    
     <select id="iframeSelect">
     </select>
-    <label for="iframeCountSlider" id="labelForIframeSlider" style="margin-top: 20px;">The slider below changes the amount of iframes that will be created. Try it with the default first, and if the extension comes back after a few minutes increase it and try again. Tip: If your computer crashes or freezes for more than 2 minutes, you should definitely decrease the amount of iframes.</label>
+    
   	<div style="display: flex; align-items: center; gap: 10px; margin: 10px 0;">
   		<input type="range" id="iframeCountSlider" min="100" max="15000" value="2000" step="100" style="flex-grow: 1;">
   		<span id="iframeCountValue">3000</span>
 	</div>
-    <button onclick="warning();" id="hangButton">Hang Extension!</button>
-    <button id="killButton" onclick="openExtensionPopup();">Kill Extension!</button>
+    <button onclick="warning();" id="hangButton">Start!</button>
+    <button id="killButton" onclick="openExtensionPopup();">Finish!</button>
   </div>
 
   <div class="overlay" id="overlay">
@@ -185,7 +184,7 @@
   <div id="killExtensionText"></div>
 
   <footer>
-    <p>Made by <a href="https://github.com/Blobby-Boi/">Blobby Boi</a></p>
+    
   </footer>
 
   <script>
@@ -259,8 +258,6 @@
         "Borderless Classroom Student": "chrome-extension://kdpgkligilplaanoablcpjahjjeghcl/pages/blockPage.html",
 	"LockDown Browser AP Classroom Edition": "chrome-extension://djpknfecbncogekjnjppojlaipeobkmo/assets/images/icon_128.png",
 	"Lugus School": "chrome-extension://eoobggamkobbcpiojefejfglbfcacgca/assets/images/icon_128.png",
-
-        "temp":"chrome-extension://chdajhpbkiaepjpkdpbidjfbdkhjpnjk/b6a60db7-c886-4ea4-938e-62a440bd6cba.js"
       };
 
       let hasSupportedExtensions = false;
