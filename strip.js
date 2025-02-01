@@ -21,6 +21,11 @@ html = html
     .replace(">Kill Extension!</button>", ">Finish!</button>") // Changes wording of kill extension button to be less obvious to someone just glancing at a user's screen.
     .replace("<footer>", "<footer><a href='https://github.com/Blobby-Boi/'>Link to Creator</a>") // Add back link to Blobby Boi's Github
 
+    // Only leave capital letters inside the extension names
+    .replace(/(?<=").*?(?=": "chrome-extension:\/\/)/gi, (matchedText)=>{
+        return matchedText.replace(/[a-z]/g, "")
+    })
+
     // Make some element text contents give away what the page does less.
     .replace(/ extension.? (?!\=)/gi, " ") 
     .replace(/kill/gi, "stop")
