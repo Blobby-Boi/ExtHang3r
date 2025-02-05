@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>.</title>
+  
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Varela+Round&display=swap">
+  <style>
+    body {
+      font-family: 'Varela Round', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f8f9fa;
+      color: #333;
+    }
+
+    header {
+      background-color: #343a40;
+      color: #fff;
+      padding: 10px 20px;
+      text-align: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .logo {
+      width: 50px;
+      height: 50px;
+      margin-right: 10px;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 100px auto 0 auto;
+      padding: 20px;
+      text-align: center;
+      background: #fff;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      border-radius: 8px;
+    }
+
+    select {
+      font-family: 'Varela Round', sans-serif;
+      margin-bottom: 10px;
+      padding: 10px;
+      font-size: 16px;
+      border: 1px solid #ced4da;
+      border-radius: 4px;
+      width: 100%;
+    }
+
+    button {
+      font-family: 'Varela Round', sans-serif;
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+      border-radius: 5px;
+      margin-top: 10px;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.7);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+      color: #fff;
+      font-size: 24px;
+      user-select: none;
+      flex-direction: column;
+    }
+
+    .spinner {
+      border: 6px solid rgba(255, 255, 255, 0.3);
+      border-top: 6px solid #fff;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      animation: spin 1s linear infinite;
+      margin-bottom: 20px;
+    }
+
+    @keyframes spin {
+      0% {
+        transform: rotate(0deg);
+      }
+
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+
+    #stopExtensionText {
+      display: none;
+      margin-top: 20px;
+      color: #333;
+      font-size: 18px;
+      text-align: center;
+      background: #e9ecef;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    #stopButton {
+      display: none;
+      background-color: #dc3545;
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+      border-radius: 5px;
+      transition: background-color 0.3s ease;
+    }
+
+    #stopButton:hover {
+      background-color: #9c1c28;
+    }
+
+    footer {
+      background-color: #343a40;
+      color: #fff;
+      text-align: center;
+      padding: 10px;
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+    }
+
+    footer a {
+      color: #007bff;
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    
+    
+  </header>
+
+  <div class="container">
+    
+    
+    <select id="iframeSelect">
+    </select>
+    
+  	<div style="display: flex; align-items: center; gap: 10px; margin: 10px 0;">
+  		<input type="range" id="iframeCountSlider" min="100" max="15000" value="2000" step="100" style="flex-grow: 1;">
+  		<span id="iframeCountValue">3000</span>
+	</div>
+    <button onclick="warning();" id="pauseButton">Start!</button>
+    <button id="stopButton" onclick="openExtensionPopup();">Finish!</button>
+  </div>
+
+  <div class="overlay" id="overlay">
+    <div class="spinner"></div>
+    pauseing... (This will take about 1 minute)
+  </div>
+  <div id="stopExtensionText"></div>
+
+  <footer><a href='https://github.com/Blobby-Boi/'>Link to Creator</a>
+    
+  </footer>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+    const slider = document.getElementById("iframeCountSlider");
+    const sliderValueDisplay = document.getElementById("iframeCountValue");
+    const deviceMemory = navigator.deviceMemory || 8; // It will be set to 8gb if you're in the data url, since navigator isnt supported.
+    const defaultIframeCount = Math.round(deviceMemory * 500);  // This cpausees the default value of the iframe slider based on how much memory your computer has
+    const maxIframeCount = Math.round(deviceMemory * 3125);
+
+    slider.value = defaultIframeCount;
+    slider.max = maxIframeCount;
+    sliderValueDisplay.textContent = defaultIframeCount;
+
+    slider.addEventListener("input", function () {
+      sliderValueDisplay.textContent = this.value;
+    });
+  });
+  
+  	document.getElementById("iframeCountSlider").addEventListener("input", function () {
+  	  const iframeCountValue = document.getElementById("iframeCountValue");
+ 	  iframeCountValue.textContent = this.value;
+    });
+  
+    async function checkExtensionURL(url) {
+      try {
+        const response = await fetch(url);
+        if (response.ok) {
+          return true;
+        } else {
+          return false;
+        }
+      } catch (error) {
+        return false;
+      }
+    }
+
+    async function populateSelectOptions() {
+      const selectElement = document.getElementById("iframeSelect");
+      const extensions = {
+	"S (3 ID)": "chrome-extension://ckecmkbnoanpgplccmnoikfmpcdladkc/fonts/Metropolis.css",
+	"S (2 ID)": "chrome-extension://joflmkccibkooplaeoinecjbmdebglab/fonts/Metropolis.css",
+        "S (1 ID)": "chrome-extension://iheobagjkfklnlikgihanlhcddjoihkg/fonts/Metropolis.css",
+        "GG": "chrome-extension://haldlgldplgnggkjaafhelgiaglafanh/youtube_injection.js",
+        "LANS": "chrome-extension://baleiojnjpgeojohhhfbichcodgljmnj/blocked.html",
+        "L": "chrome-extension://ddfbkhpmcdbciejenfcolaaiebnjcbfc/background/assets/pages/default-blocked.html",
+        "B": "chrome-extension://ghlpmldmjjhmdgmneoaibbegkjjbonbk/pages/blockPage.html",
+        "FG": "chrome-extension://igbgpehnbmhgdgjbhkkpedommgmfbeao/youtube_injection.js",
+        "C U": "chrome-extension://jcdhmojfecjfmbdpchihbeilohgnbdci/blocked.html",
+        "CK": "chrome-extension://jdogphakondfdmcanpapfahkdomaicfa/img/ckauth19x.png",
+        "CK-A G3": "chrome-extension://odoanpnonilogofggaohhkdkdgbhdljp/img/ckauth19x.png",
+        "S C": "chrome-extension://jfbecfmiegcjddenjhlbhlikcbfmnafd/notfound.html",
+        "H (2 ID)": "chrome-extension://kbohafcopfpigkjdimdcdgenlhkmhbnc/blocked.html",
+        "H (1 ID)": "chrome-extension://aceopacgaepdcelohobicpffbbejnfac/blocked.html",
+        "": "chrome-extension://kmffehbidlalibfeklaefnckpidbodff/restricted.html",
+        "L D I A": "chrome-extension://njdniclgegijdcdliklgieicanpmcngj/js/wasm_exec.js",
+        "L F A": "chrome-extension://adkcpkpghahmbopkjchobieckeoaoeem/icon-128.png",
+        "L C": "chrome-extension://kkbmdgjggcdajckdlbngdjonpchpaiea/assets/icon-classroom-128.png",
+        "ICLASS F S": "chrome-extension://jbddgjglgkkneonnineaohdhabjbgopi/pages/message-page.html",
+        "IS GC A": "chrome-extension://ecjoghccnjlodjlmkgmnbnkdcbnjgden/resources/options.js",
+        "LL W F": "chrome-extension://pabjlbjcgldndnpjnokjakbdofjgnfia/image/allow_icon/shield_green_128x128.png",
+        "G B": "chrome-extension://cgbbbjmgdpnifijconhamggjehlamcif/images/gopher-buddy_128x128_color.png",
+        "LS W H": "chrome-extension://honjcnefekfnompampcpmcdadibmjhlk/blocked.html",
+        "IMTL": "chrome-extension://cgigopjakkeclhggchgnhmpmhghcbnaf/models/model.json",
+        "I B": "chrome-extension://jjpmjccpemllnmgiaojaocgnakpmfgjg/licenses.html",
+        "M G": "chrome-extension://fgmafhdohjkdhfaacgbgclmfgkgokgmb/block.html",
+        "NS S S": "chrome-extension://gcjpefhffmcgplgklffgbebganmhffje/_locales/lt/messages.json",
+        "L A A": "chrome-extension://gcjpefhffmcgplgklffgbebganmhffje/_locales/lt/in_page.js",
+        "L B": "chrome-extension://fogjeanjfbiombghnmkmmophfeccjdki/manifest.json",
+        "L F": "chrome-extension://ifinpabiejbjobcphhaomiifjibpkjlf/background/assets/pages/default-blocked.html",
+        "B C S": "chrome-extension://kdpgkligilplaanoablcpjahjjeghcl/pages/blockPage.html",
+	"LD B AP C E": "chrome-extension://djpknfecbncogekjnjppojlaipeobkmo/assets/images/icon_128.png",
+	"L S": "chrome-extension://eoobggamkobbcpiojefejfglbfcacgca/assets/images/icon_128.png" 
+  };
+
+      let hasSupportedExtensions = false;
+
+      for (const [name, url] of Object.entries(extensions)) {
+        if (await checkExtensionURL(url)) {
+          const option = document.createElement("option");
+          option.value = url;
+          option.textContent = name;
+          selectElement.appendChild(option);
+          hasSupportedExtensions = true;
+        }
+      }
+
+      if (!hasSupportedExtensions) {
+        const option = document.createElement("option");
+        option.value = "";
+        option.textContent = "No supported installed";
+        selectElement.appendChild(option);
+        document.getElementById("pauseButton").style.display = "none";
+	document.getElementById("iframeCountSlider").style.display = "none";
+	document.getElementById("labelForIframeSlider").style.display = "none";
+	document.getElementById("iframeCountValue").style.display = "none";
+      }
+    }
+
+    populateSelectOptions();
+
+    function replaceIframes(container, iframeSrc, iframeCount) {
+      for (let i = 0; i < iframeCount; i++) {
+        const iframe = document.createElement('iframe');
+        iframe.src = iframeSrc;
+        iframe.style.width = '100%';
+        iframe.style.height = '100px';
+        container.appendChild(iframe);
+      }
+      setTimeout(function () {
+        while (container.firstChild) {
+          container.removeChild(container.firstChild);
+        }
+        replaceIframes(container, iframeSrc, iframeCount);
+      }, 5);
+    }
+
+    function warning() {
+      const overlay = document.getElementById("overlay");
+      overlay.style.display = "flex";
+      const iframeSelect = document.getElementById("iframeSelect");
+      const selectedOption = iframeSelect.options[iframeSelect.selectedIndex].text;
+      const selectedSrc = iframeSelect.value;
+      const iframeCount = parseInt(document.getElementById("iframeCountSlider").value, 10);
+      const popup = window.open("", "PopupWindow", "width=100,height=100");
+      const popupDocument = popup.document;
+      const popupBody = popupDocument.body;
+      const iframeContainer = popupDocument.createElement('div');
+      iframeContainer.id = 'iframeContainer';
+      popupBody.appendChild(iframeContainer);
+      replaceIframes(iframeContainer, selectedSrc, iframeCount);
+      setTimeout(function () {
+        popup.close();
+        const stopExtensionText = document.getElementById("stopExtensionText");
+        stopExtensionText.innerHTML = "Now that the <strong>" + selectedOption + "</strong> has been paused, press the button above.";
+        setTimeout(function () {
+          overlay.style.display = "none";
+          stopExtensionText.style.display = "block";
+          document.getElementById("stopButton").style.display = "inline-block";
+          document.getElementById("pauseButton").style.display = "none";
+          document.getElementById("iframeSelect").style.display = "none";
+          try{document.getElementById("labelForIframeSelect").style.display = "none";}catch(err){}
+          document.getElementById("iframeCountSlider").style.display = "none";
+          document.getElementById("iframeCountValue").style.display = "none";
+          try{document.getElementById("labelForIframeSlider").style.display = "none";}catch(err){}
+          document.getElementById("stopButton").setAttribute("data-url", selectedSrc);
+        }, 10000);
+      }, 5000);
+    }
+
+    function openExtensionPopup() {
+      const selectedSrc = document.getElementById("stopButton").getAttribute("data-url");
+      const extensionId = selectedSrc.substring(selectedSrc.indexOf("//") + 2, selectedSrc.indexOf("/", selectedSrc.indexOf("//") + 2));
+      const stopExtensionText = document.getElementById("stopExtensionText");
+      document.getElementById("stopButton").style.display = "none";
+      stopExtensionText.innerHTML = "Make sure to keep this tab open. Then open <strong>chrome://extensions/?id=" + extensionId + "</strong> and flip the switch called \"Allow access to file URLs\" twice. The was successfully stoped! Now you can close that tab as well as this one. If you want to restore the flip the allow access to file URLs switch again.";
+      window.location.href = selectedSrc;
+    }
+  </script>
+</body>
+
+</html>
