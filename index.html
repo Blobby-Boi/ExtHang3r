@@ -185,7 +185,7 @@
         const sliderValueDisplay = document.getElementById("iframeCountValue");
         const deviceMemory = navigator.deviceMemory || 8; // It will be set to 8gb if you're in the data url, since navigator isnt supported.
         const defaultIframeCount = Math.round(deviceMemory * 500); // This changes the default value of the iframe slider based on how much memory your computer has
-        const maxIframeCount = Math.round(deviceMemory * 3125);
+        const maxIframeCount = Math.round(deviceMemory * 10000);
         slider.value = defaultIframeCount;
         slider.max = maxIframeCount;
         sliderValueDisplay.textContent = defaultIframeCount;
