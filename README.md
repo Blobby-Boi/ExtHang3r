@@ -1,7 +1,7 @@
 # ExtHang3r
 
 > [!WARNING]  
-> It's not recommended to use ExtHang3r due to it being outdated and not very effective anymore. It's recommended you start using [ExtPrint3r](https://github.com/Blobby-Boi/ExtPrint3r) as ExtHang3r will likely be archived soon. 
+> It's not recommended to use ExtHang3r due to it being outdated and not very effective anymore. It's recommended you start using [ExtPrint3r](https://github.com/Blobby-Boi/ExtPrint3r). This repo has been archived and will not receive updates anymore.
 
 ## What is it?
 ExtHang3r is an exploit created by <a href="https://github.com/Blobby-Boi/">Blobby Boi</a> that allows ChromeOS users to kill managed extensions after the LTMEAT patch. It remains unpatched in all new ChromeOS versions as of February 2025.
