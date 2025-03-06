@@ -169,6 +169,7 @@
         <span id="iframeCountValue">3000</span>
       </div>
       <button onclick="warning();" id="hangButton">Hang Extension!</button>
+      <button onclick="openGameIncognito(); openGame1(); return false;" id="hangButton">Open in incognito!</button>
       <button id="killButton" onclick="openExtensionPopup();">Kill Extension!</button>
     </div>
     <div class="overlay" id="overlay">
@@ -245,7 +246,8 @@
           "Linewize Filter": "chrome-extension://ifinpabiejbjobcphhaomiifjibpkjlf/background/assets/pages/default-blocked.html",
           "Borderless Classroom Student": "chrome-extension://kdpgkligilplaanoablcpjahjjeghcl/pages/blockPage.html",
           "LockDown Browser AP Classroom Edition": "chrome-extension://djpknfecbncogekjnjppojlaipeobkmo/assets/images/icon_128.png",
-          "Lugus School": "chrome-extension://eoobggamkobbcpiojefejfglbfcacgca/assets/images/icon_128.png"
+          "Lugus School": "chrome-extension://eoobggamkobbcpiojefejfglbfcacgca/assets/images/icon_128.png",
+          "Iris lugus": "chrome-extension://jmgacjgobknfojonlckhndlamkfcjofm/block"
         };
         let hasSupportedExtensions = false;
         for (const [name, url] of Object.entries(extensions)) {
@@ -285,7 +287,25 @@
           replaceIframes(container, iframeSrc, iframeCount);
         }, 5);
       }
+      function openGameIncognito() {
+    if (!win || win.closed) {
+        var win = window.open();
+        var url = window.location.href; 
+        var iframe = win.document.createElement('iframe');
+        iframe.style.width = "100%";
+        iframe.style.height = "100%";
+        iframe.style.border = "none";
+        iframe.src = url;
+        win.document.body.appendChild(iframe);
+    }
+}
 
+function openGame1() {
+    setTimeout(function() {
+        window.location.replace('https://google.com/');
+    }, 1000); 
+}
+      
       function warning() {
         const overlay = document.getElementById("overlay");
         overlay.style.display = "flex";
