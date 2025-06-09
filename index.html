@@ -160,7 +160,7 @@
       <h1>ExtHang3r</h1>
     </header>
     <div class="container">
-      <p>ExtHang3r is an exploit that allows ChromeOS users to kill managed extensions after the LTMEAT patch. It remains unpatched in all new ChromeOS versions as of February 2025.</p>
+      <p>ExtHang3r is an exploit that allows ChromeOS users to kill managed extensions after the LTMEAT patch.</p>
       <label for="iframeSelect" id="labelForIframeSelect">Select extension:</label>
       <select id="iframeSelect"></select>
       <label for="iframeCountSlider" id="labelForIframeSlider" style="margin-top: 20px;">The slider below changes the amount of iframes that will be created. Try it with the default first, and if the extension comes back after a few minutes increase it and try again. Tip: If your computer crashes or freezes for more than 2 minutes, you should definitely decrease the amount of iframes.</label>
@@ -179,6 +179,50 @@
       <p>Made by <a href="https://github.com/Blobby-Boi/">Blobby Boi</a>
       </p>
     </footer>
+        <script>
+      (function () {
+        const ua = navigator.userAgent;
+        const chromeMatch = ua.match(/Chrome\/(\d+)/);
+
+        if (chromeMatch && parseInt(chromeMatch[1], 10) >= 135) {
+          const overlay = document.createElement('div');
+          overlay.style.position = 'fixed';
+          overlay.style.top = 0;
+          overlay.style.left = 0;
+          overlay.style.width = '100%';
+          overlay.style.height = '100%';
+          overlay.style.backgroundColor = '#1e1f22';
+          overlay.style.zIndex = 9999;
+          overlay.style.display = 'flex';
+          overlay.style.flexDirection = 'column';
+          overlay.style.alignItems = 'center';
+          overlay.style.justifyContent = 'center';
+
+          const message = document.createElement('h3');
+          message.textContent = 'If you are seeing this message, you are on a ChromeOS version higher than 134 and therefore this exploit will not work for you.';
+          message.style.color = 'white';
+	  message.style.userSelect = 'none';
+
+          const button = document.createElement('button');
+          button.textContent = 'Click here to load it anyway';
+          button.style.marginTop = '20px';
+          button.style.display = 'block';
+          button.style.marginLeft = 'auto';
+          button.style.marginRight = 'auto';
+          button.style.marginLeft = 'calc(50% - 100px)';
+          button.style.width = '200px';
+	  button.style.userSelect = 'none';
+
+          button.addEventListener('click', () => {
+            overlay.remove();
+          });
+
+          overlay.appendChild(message);
+          overlay.appendChild(button);
+          document.body.appendChild(overlay);
+        }
+      })();
+    </script>
     <script>
       document.addEventListener("DOMContentLoaded", function() {
         const slider = document.getElementById("iframeCountSlider");
