@@ -1,10 +1,9 @@
 # ExtHang3r
-
 > [!WARNING]  
 > It's not recommended to use ExtHang3r due to it being outdated and not very effective anymore. It's recommended you start using [ExtPrint3r](https://github.com/Blobby-Boi/ExtPrint3r). This repo has been archived and will not receive updates anymore.
 
 ## What is it?
-ExtHang3r is an exploit created by <a href="https://github.com/Blobby-Boi/">Blobby Boi</a> that allows ChromeOS users to kill managed extensions after the LTMEAT patch. It remains unpatched in all new ChromeOS versions as of February 2025.
+ExtHang3r is an exploit created by <a href="https://github.com/Blobby-Boi/">Blobby Boi</a> that allows ChromeOS users to kill managed extensions after the LTMEAT patch. <b>This has been patched from ChromeOS v135+ (Changes to this setting will be applied once Chrome restarts - probably added because of this exploit...)</b>
 
 ## How does it work?
 This exploit works very similar to <b>Dextensify</b>. The main difference being that instead of creating iframes and slowly getting rid of them, a separate popup window is created that spams iframes and refreshes them. After a few seconds, the popup is closed achieving similar behavior to the <b>LTMEAT Flood</b> method. This worked great in paper, but for whatever reason this hang just woudn't let you disable the extension with the file URLs switch. It would instead just restart the extension. However, a solution was quickly found and it was as simple as just attempting to load any of the extension's pages prior to flipping the switch.
